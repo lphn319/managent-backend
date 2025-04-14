@@ -1,20 +1,23 @@
 package hcmute.lp.backend.model.entity;
 
+import hcmute.lp.backend.model.common.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 @Entity
 @Table(name = "suppliers", uniqueConstraints = {
         @UniqueConstraint(columnNames = "company_name")
 })
-public class Supplier {
+public class Supplier extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private int id;
