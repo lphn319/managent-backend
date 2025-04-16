@@ -22,13 +22,43 @@ public class Brand extends BaseEntity {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private int id;
 
-    @jakarta.persistence.Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @jakarta.persistence.Column(name = "description")
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "logo_url")
+    private String logoUrl;
+
+    @Column(name = "origin")
+    private String origin;
+
+    @Column(name = "website")
+    private String website;
+
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private BrandStatus status;
 
     @OneToMany
     @JoinColumn(name = "brand_id")
-    private List<Product> product;
+    private List<Product> products;
+
+    // Transient field for product count (not stored in database)
+    @Transient
+    private Integer productCount;
+
+    // Helper method to get product count
+    public Integer getProductCount() {
+        if (this.productCount != null) {
+            return this.productCount;
+        }
+        return this.products != null ? this.products.size() : 0;
+    }
+
+
+    public enum BrandStatus {
+        ACTIVE, INACTIVE
+    }
 }

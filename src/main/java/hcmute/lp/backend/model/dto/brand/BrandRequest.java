@@ -12,4 +12,8 @@ import lombok.NoArgsConstructor;
 public class BrandRequest {
     private String name;
     private String description;
+    private String logoUrl;
+    private String origin;
+    private String website;
+    private String status;
 }

@@ -14,4 +14,9 @@ public class BrandDto {
     private int id;
     private String name;
     private String description;
+    private String logoUrl;
+    private String origin;
+    private String website;
+    private int productCount;
+    private String status;
 }

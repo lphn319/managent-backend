@@ -14,6 +14,11 @@ public class BrandMapper {
                 .id(brand.getId())
                 .name(brand.getName())
                 .description(brand.getDescription())
+                .logoUrl(brand.getLogoUrl())
+                .origin(brand.getOrigin())
+                .website(brand.getWebsite())
+                .productCount(brand.getProductCount())
+                .status(brand.getStatus().name())
                 .build();
     }
 
@@ -21,6 +26,15 @@ public class BrandMapper {
         Brand brand = new Brand();
         brand.setName(brandRequest.getName());
         brand.setDescription(brandRequest.getDescription());
+        brand.setLogoUrl(brandRequest.getLogoUrl());
+        brand.setOrigin(brandRequest.getOrigin());
+        brand.setWebsite(brandRequest.getWebsite());
+
+        if(brandRequest.getStatus() != null) {
+            brand.setStatus(Brand.BrandStatus.valueOf(brandRequest.getStatus()));
+        } else {
+            brand.setStatus(Brand.BrandStatus.ACTIVE);
+        }
         return brand;
     }
 
@@ -37,5 +51,18 @@ public class BrandMapper {
         if (brandRequest.getDescription() != null) {
             brand.setDescription(brandRequest.getDescription());
         }
+        if (brandRequest.getLogoUrl() != null) {
+            brand.setLogoUrl(brandRequest.getLogoUrl());
+        }
+        if (brandRequest.getOrigin() != null) {
+            brand.setOrigin(brandRequest.getOrigin());
+        }
+        if (brandRequest.getWebsite() != null) {
+            brand.setWebsite(brandRequest.getWebsite());
+        }
+        if(brandRequest.getStatus() != null) {
+            brand.setStatus(Brand.BrandStatus.valueOf(brandRequest.getStatus()));
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 package hcmute.lp.backend.model.dto.category;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,4 +17,9 @@ public class CategoryRequest {
 
     @Size(max = 255, message = "Description must be less than 255 characters")
     private String description;
+
+    private Integer parentId;
+
+    @Pattern(regexp = "^(ACTIVE|INACTIVE)$", message = "Status must be either ACTIVE or INACTIVE")
+    private String status;
 }
