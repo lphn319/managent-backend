@@ -30,10 +30,14 @@ public class BrandMapper {
         brand.setOrigin(brandRequest.getOrigin());
         brand.setWebsite(brandRequest.getWebsite());
 
-        if(brandRequest.getStatus() != null) {
-            brand.setStatus(Brand.BrandStatus.valueOf(brandRequest.getStatus()));
-        } else {
-            brand.setStatus(Brand.BrandStatus.ACTIVE);
+        try {
+            if (brandRequest.getStatus() != null) {
+                brand.setStatus(Brand.BrandStatus.valueOf(brandRequest.getStatus().toUpperCase()));
+            } else {
+                brand.setStatus(Brand.BrandStatus.ACTIVE);
+            }
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid brand status: " + brandRequest.getStatus());
         }
         return brand;
     }
