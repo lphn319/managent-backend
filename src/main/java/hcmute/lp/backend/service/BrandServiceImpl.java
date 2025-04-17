@@ -9,9 +9,7 @@ import hcmute.lp.backend.repository.BrandRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -107,5 +105,37 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public boolean existsByName(String name) {
         return brandRepository.existsByName(name);
+    }
+
+    @Override
+    public BrandDto updateBrandStatus(int id, String status) {
+        Brand brand = brandRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Brand not found with id: " + id));
+
+        brand.setStatus(Brand.BrandStatus.valueOf(status));
+        brand = brandRepository.save(brand);
+        return brandMapper.toDto(brand);
+    }
+
+    @Override
+    public List<BrandDto> getFeaturedBrands(int limit) {
+        List<Brand> activeAndOrderedBrands = brandRepository.findByStatusOrderByProductsDesc(Brand.BrandStatus.ACTIVE);
+        return brandMapper.toDtoList(activeAndOrderedBrands.stream()
+                .limit(limit)
+                .collect(Collectors.toList()));
+    }
+
+    @Override
+    public Map<String, Integer> getBrandStatistics() {
+        Map<String, Integer> statistics = new HashMap<>();
+
+        List<Brand> allBrands = brandRepository.findAll();
+        List<Brand> activeBrands = brandRepository.findByStatus(Brand.BrandStatus.ACTIVE);
+
+        statistics.put("totalBrands", allBrands.size());
+        statistics.put("activeBrands", activeBrands.size());
+        statistics.put("inactiveBrands", allBrands.size() - activeBrands.size());
+
+        return statistics;
     }
 }
