@@ -3,19 +3,27 @@ package hcmute.lp.backend.service.impl;
 import hcmute.lp.backend.exception.UnauthorizedException;
 import hcmute.lp.backend.model.dto.auth.AuthResponse;
 import hcmute.lp.backend.model.dto.auth.LoginRequest;
+import hcmute.lp.backend.model.dto.auth.RegisterRequest;
+import hcmute.lp.backend.model.entity.Department;
+import hcmute.lp.backend.model.entity.Role;
 import hcmute.lp.backend.model.entity.User;
 import hcmute.lp.backend.model.mapper.UserMapper;
+import hcmute.lp.backend.repository.RoleRepository;
 import hcmute.lp.backend.repository.UserRepository;
 import hcmute.lp.backend.security.CustomUserDetails;
 import hcmute.lp.backend.security.JwtService;
 import hcmute.lp.backend.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.BadRequestException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +33,8 @@ public class AuthServiceImpl implements AuthService {
     private final JwtService jwtService;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
 
     @Override
     public AuthResponse login(LoginRequest loginRequest) {
@@ -61,6 +71,48 @@ public class AuthServiceImpl implements AuthService {
             log.error("Đăng nhập thất bại với email: {}", loginRequest.getEmail());
             throw new UnauthorizedException("Email hoặc mật khẩu không chính xác");
         }
+    }
+
+    @Override
+    public AuthResponse register(RegisterRequest registerRequest) throws BadRequestException {
+        // Kiểm tra email đã tồn tại chưa
+        if (userRepository.existsByEmail(registerRequest.getEmail())) {
+            throw new BadRequestException("Email đã được sử dụng");
+        }
+
+        // Lấy vai trò CUSTOMER
+        Role customerRole = roleRepository.findByName("CUSTOMER")
+                .orElseThrow(() -> new RuntimeException("Vai trò CUSTOMER không tồn tại"));
+
+        // Tạo đối tượng User từ thông tin đăng ký
+        User user = User.builder()
+                .name(registerRequest.getName())
+                .email(registerRequest.getEmail())
+                .password(passwordEncoder.encode(registerRequest.getPassword()))
+                .phoneNumber(registerRequest.getPhoneNumber())
+                .gender(registerRequest.getGender())
+                .active(true)
+                .role(customerRole)
+                .department(null)
+                .createdAt(LocalDateTime.now())
+                .build();
+
+        // Lưu người dùng vào cơ sở dữ liệu
+        User savedUser = userRepository.save(user);
+
+        // Tạo UserDetails để tạo token
+        CustomUserDetails userDetails = new CustomUserDetails(savedUser);
+
+        // Tạo token JWT
+        String accessToken = jwtService.generateToken(userDetails);
+        String refreshToken = jwtService.generateRefreshToken(userDetails);
+
+        // Tạo đối tượng phản hồi
+        return AuthResponse.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .user(userMapper.toDto(savedUser))
+                .build();
     }
 }
 
