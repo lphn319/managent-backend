@@ -26,8 +26,9 @@ public interface UserMapper {
     User toEntity(UserRequest userRequest, Role role, Department department);
 
     @Mapping(target = "roleName", source = "role.name")
-    @Mapping(target = "departmentName", source = "department.name")
+    @Mapping(target = "departmentName", expression = "java(user.getDepartment() != null ? user.getDepartment().getName() : null)")
     @Mapping(target = "isActive", source = "active")
+    @Mapping(target = "dateOfBirth", source = "dateOfBirth")
     UserDto toDto(User user);
 
     @Mapping(target = "id", ignore = true)
