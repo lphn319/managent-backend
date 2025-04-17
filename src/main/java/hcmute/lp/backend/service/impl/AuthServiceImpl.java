@@ -4,7 +4,6 @@ import hcmute.lp.backend.exception.UnauthorizedException;
 import hcmute.lp.backend.model.dto.auth.AuthResponse;
 import hcmute.lp.backend.model.dto.auth.LoginRequest;
 import hcmute.lp.backend.model.dto.auth.RegisterRequest;
-import hcmute.lp.backend.model.entity.Department;
 import hcmute.lp.backend.model.entity.Role;
 import hcmute.lp.backend.model.entity.User;
 import hcmute.lp.backend.model.mapper.UserMapper;
@@ -56,9 +55,15 @@ public class AuthServiceImpl implements AuthService {
                 throw new UnauthorizedException("Tài khoản đã bị vô hiệu hóa");
             }
 
-            // Tạo token JWT
-            String accessToken = jwtService.generateToken(userDetails);
-            String refreshToken = jwtService.generateRefreshToken(userDetails);
+            // Kiểm tra cờ rememberMe và sử dụng giá trị mặc định false nếu null
+            boolean rememberMe = loginRequest.getRememberMe() != null && loginRequest.getRememberMe();
+
+            // Tạo token JWT với thời hạn dựa trên rememberMe
+            String accessToken = jwtService.generateToken(userDetails, rememberMe);
+            String refreshToken = jwtService.generateRefreshToken(userDetails, rememberMe);
+
+            // Ghi log sự kiện đăng nhập thành công
+            log.info("Đăng nhập thành công: {} với cờ rememberMe={}", loginRequest.getEmail(), rememberMe);
 
             // Tạo đối tượng phản hồi
             return AuthResponse.builder()
@@ -103,9 +108,12 @@ public class AuthServiceImpl implements AuthService {
         // Tạo UserDetails để tạo token
         CustomUserDetails userDetails = new CustomUserDetails(savedUser);
 
-        // Tạo token JWT
-        String accessToken = jwtService.generateToken(userDetails);
-        String refreshToken = jwtService.generateRefreshToken(userDetails);
+        // Tạo token JWT (không sử dụng rememberMe cho đăng ký)
+        String accessToken = jwtService.generateToken(userDetails, false);
+        String refreshToken = jwtService.generateRefreshToken(userDetails, false);
+
+        // Ghi log sự kiện đăng ký thành công
+        log.info("Đăng ký thành công cho email: {}", registerRequest.getEmail());
 
         // Tạo đối tượng phản hồi
         return AuthResponse.builder()
@@ -115,4 +123,3 @@ public class AuthServiceImpl implements AuthService {
                 .build();
     }
 }
-
