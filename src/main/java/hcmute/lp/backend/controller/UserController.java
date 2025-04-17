@@ -45,7 +45,7 @@ public class UserController {
     }
 
     @PostMapping
-//    @HasAnyRole({"ADMIN"})
+    @HasAnyRole({"ADMIN"})
     public ResponseEntity<ApiResponse> createUser(@Valid @RequestBody UserRequest userRequest) {
         UserDto createdUser = userService.createUser(userRequest);
         return new ResponseEntity<>(new ApiResponse(true, "Tạo người dùng thành công", createdUser), HttpStatus.CREATED);

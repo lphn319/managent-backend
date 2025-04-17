@@ -24,8 +24,14 @@ public class JwtService {
     @Value("${application.security.jwt.expiration}")
     private long jwtExpiration;
 
+    @Value("${application.security.jwt.long-lived-expiration:2592000000}") // Mặc định 30 ngày
+    private long jwtLongLivedExpiration;
+
     @Value("${application.security.jwt.refresh-token.expiration}")
     private long refreshExpiration;
+
+    @Value("${application.security.jwt.refresh-token.long-lived-expiration:7776000000}") // Mặc định 90 ngày
+    private long refreshLongLivedExpiration;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -37,18 +43,29 @@ public class JwtService {
     }
 
     public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+        return generateToken(userDetails, false);
+    }
+
+    public String generateToken(UserDetails userDetails, boolean rememberMe) {
+        return generateToken(new HashMap<>(), userDetails, rememberMe);
     }
 
     public String generateToken(
             Map<String, Object> extraClaims,
-            UserDetails userDetails
+            UserDetails userDetails,
+            boolean rememberMe
     ) {
-        return buildToken(extraClaims, userDetails, jwtExpiration);
+        long expiration = rememberMe ? jwtLongLivedExpiration : jwtExpiration;
+        return buildToken(extraClaims, userDetails, expiration);
     }
 
     public String generateRefreshToken(UserDetails userDetails) {
-        return buildToken(new HashMap<>(), userDetails, refreshExpiration);
+        return generateRefreshToken(userDetails, false);
+    }
+
+    public String generateRefreshToken(UserDetails userDetails, boolean rememberMe) {
+        long expiration = rememberMe ? refreshLongLivedExpiration : refreshExpiration;
+        return buildToken(new HashMap<>(), userDetails, expiration);
     }
 
     private String buildToken(
