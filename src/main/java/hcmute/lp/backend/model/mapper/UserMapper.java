@@ -27,6 +27,7 @@ public interface UserMapper {
 
     @Mapping(target = "roleName", source = "role.name")
     @Mapping(target = "departmentName", source = "department.name")
+    @Mapping(target = "isActive", source = "active")
     UserDto toDto(User user);
 
     @Mapping(target = "id", ignore = true)

@@ -1,4 +1,4 @@
-package hcmute.lp.backend.service;
+package hcmute.lp.backend.service.impl;
 
 import hcmute.lp.backend.exception.ResourceNotFoundException;
 import hcmute.lp.backend.model.dto.category.CategoryDto;
@@ -6,6 +6,8 @@ import hcmute.lp.backend.model.dto.category.CategoryRequest;
 import hcmute.lp.backend.model.entity.Category;
 import hcmute.lp.backend.model.mapper.CategoryMapper;
 import hcmute.lp.backend.repository.CategoryRepository;
+import hcmute.lp.backend.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,13 +17,12 @@ import java.util.List;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private final CategoryRepository categoryRepository;
-    private final CategoryMapper categoryMapper;
+    @Autowired
+    private CategoryRepository categoryRepository;
+    @Autowired
+    private CategoryMapper categoryMapper;
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository, CategoryMapper categoryMapper) {
-        this.categoryRepository = categoryRepository;
-        this.categoryMapper = categoryMapper;
-    }
+
 
     @Override
     public List<CategoryDto> getAllCategories() {

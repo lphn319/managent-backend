@@ -1,12 +1,12 @@
-package hcmute.lp.backend.service;
+package hcmute.lp.backend.service.impl;
 
 import hcmute.lp.backend.exception.ResourceNotFoundException;
 import hcmute.lp.backend.model.dto.discount.DiscountDto;
 import hcmute.lp.backend.model.dto.discount.DiscountRequest;
 import hcmute.lp.backend.model.entity.Discount;
-import hcmute.lp.backend.model.entity.Product;
 import hcmute.lp.backend.model.mapper.DiscountMapper;
 import hcmute.lp.backend.repository.DiscountRepository;
+import hcmute.lp.backend.service.DiscountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class DiscountServiceImpl implements DiscountService{
+public class DiscountServiceImpl implements DiscountService {
     @Autowired
     private DiscountRepository discountRepository;
     @Autowired

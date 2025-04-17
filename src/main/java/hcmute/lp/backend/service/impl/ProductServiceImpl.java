@@ -1,4 +1,4 @@
-package hcmute.lp.backend.service;
+package hcmute.lp.backend.service.impl;
 
 import hcmute.lp.backend.exception.ResourceNotFoundException;
 import hcmute.lp.backend.model.dto.product.ProductDto;
@@ -10,6 +10,7 @@ import hcmute.lp.backend.model.mapper.ProductMapper;
 import hcmute.lp.backend.repository.BrandRepository;
 import hcmute.lp.backend.repository.CategoryRepository;
 import hcmute.lp.backend.repository.ProductRepository;
+import hcmute.lp.backend.service.ProductService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

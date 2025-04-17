@@ -1,4 +1,4 @@
-package hcmute.lp.backend.service;
+package hcmute.lp.backend.service.impl;
 
 import hcmute.lp.backend.exception.ResourceNotFoundException;
 import hcmute.lp.backend.model.dto.supplier.SupplierDto;
@@ -6,6 +6,7 @@ import hcmute.lp.backend.model.dto.supplier.SupplierRequest;
 import hcmute.lp.backend.model.entity.Supplier;
 import hcmute.lp.backend.model.mapper.SupplierMapper;
 import hcmute.lp.backend.repository.SupplierRepository;
+import hcmute.lp.backend.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
