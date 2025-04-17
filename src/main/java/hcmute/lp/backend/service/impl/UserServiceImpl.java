@@ -1,4 +1,4 @@
-package hcmute.lp.backend.service;
+package hcmute.lp.backend.service.impl;
 
 import hcmute.lp.backend.exception.ResourceNotFoundException;
 import hcmute.lp.backend.exception.UnauthorizedException;
@@ -13,6 +13,7 @@ import hcmute.lp.backend.repository.RoleRepository;
 import hcmute.lp.backend.repository.UserRepository;
 import hcmute.lp.backend.security.SecurityUtils;
 
+import hcmute.lp.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package hcmute.lp.backend.service;
+package hcmute.lp.backend.service.impl;
 
 import hcmute.lp.backend.exception.ResourceNotFoundException;
 import hcmute.lp.backend.model.dto.department.DepartmentDto;
@@ -6,18 +6,19 @@ import hcmute.lp.backend.model.dto.department.DepartmentRequest;
 import hcmute.lp.backend.model.entity.Department;
 import hcmute.lp.backend.model.mapper.DepartmentMapper;
 import hcmute.lp.backend.repository.DepartmentRepository;
+import hcmute.lp.backend.service.DepartmentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
-    private final DepartmentRepository departmentRepository;
-    private final DepartmentMapper departmentMapper;
-    public DepartmentServiceImpl(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper) {
-        this.departmentRepository = departmentRepository;
-        this.departmentMapper = departmentMapper;
-    }
+
+    @Autowired
+    private DepartmentRepository departmentRepository;
+    @Autowired
+    private DepartmentMapper departmentMapper;
 
     @Override
     public List<DepartmentDto> getAllDepartments() {

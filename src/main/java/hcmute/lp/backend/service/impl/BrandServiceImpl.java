@@ -1,4 +1,4 @@
-package hcmute.lp.backend.service;
+package hcmute.lp.backend.service.impl;
 
 import hcmute.lp.backend.exception.ResourceNotFoundException;
 import hcmute.lp.backend.model.dto.brand.BrandDto;
@@ -6,6 +6,8 @@ import hcmute.lp.backend.model.dto.brand.BrandRequest;
 import hcmute.lp.backend.model.entity.Brand;
 import hcmute.lp.backend.model.mapper.BrandMapper;
 import hcmute.lp.backend.repository.BrandRepository;
+import hcmute.lp.backend.service.BrandService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,13 +17,10 @@ import java.util.stream.Collectors;
 @Service
 public class BrandServiceImpl implements BrandService {
 
-    private final BrandRepository brandRepository;
-    private final BrandMapper brandMapper;
-
-    public BrandServiceImpl(BrandRepository brandRepository, BrandMapper brandMapper) {
-        this.brandRepository = brandRepository;
-        this.brandMapper = brandMapper;
-    }
+    @Autowired
+    private BrandRepository brandRepository;
+    @Autowired
+    private BrandMapper brandMapper;
 
     @Override
     public List<BrandDto> getAllBrands() {
