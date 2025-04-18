@@ -14,4 +14,10 @@ public interface CategoryService {
     void deleteCategory(int id);
     boolean existsById(int id);
     boolean existsByName(String name);
+
+    CategoryDto updateCategoryStatus(int id, String status);
+    List<CategoryDto> getCategoriesByParentId(int parentId);
+    List<CategoryDto> getCategoriesByStatus(String status);
+    List<CategoryDto> getCategoriesByParentIdAndStatus(int parentId, String status);
+
 }

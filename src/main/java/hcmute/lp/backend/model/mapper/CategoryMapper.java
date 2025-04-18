@@ -40,6 +40,13 @@ public class CategoryMapper {
         Category category = new Category();
         category.setName(categoryRequest.getName());
         category.setDescription(categoryRequest.getDescription());
+        if (categoryRequest.getParentId() != null) {
+            Category parent = new Category();
+            parent.setId(categoryRequest.getParentId());
+            category.setParent(parent);
+        } else {
+            category.setParent(null);
+        }
 
         if (categoryRequest.getStatus() != null) {
             category.setStatus(Category.CategoryStatus.valueOf(categoryRequest.getStatus()));
