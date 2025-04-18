@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/categories")
@@ -57,8 +58,11 @@ public class CategoryController {
     }
 
     @PatchMapping("/{id}/status")
-    public ResponseEntity<ApiResponse<Void>> updateCategoryStatus(@PathVariable int id, @RequestParam String status) {
-        categoryService.updateCategoryStatus(id, status);
-        return ResponseEntity.ok(ApiResponse.success("Category status updated successfully", null));
+    public ResponseEntity<CategoryDto> updateCategoryStatus(
+            @PathVariable int id,
+            @RequestBody Map<String, String> statusRequest) {
+        String status = statusRequest.get("status");
+        CategoryDto updatedCategory = categoryService.updateCategoryStatus(id, status);
+        return ResponseEntity.ok(updatedCategory);
     }
 }
