@@ -91,6 +91,13 @@ public class AuthServiceImpl implements AuthService {
             throw new BadRequestException("Email đã được sử dụng");
         }
 
+        // Kiểm tra số điện thoại có hợp lệ không (nếu được cung cấp)
+        if (registerRequest.getPhoneNumber() != null && !registerRequest.getPhoneNumber().isEmpty()) {
+            if (userRepository.existsByPhoneNumber(registerRequest.getPhoneNumber())) {
+                throw new BadRequestException("Số điện thoại đã được sử dụng");
+            }
+        }
+
         // Lấy vai trò CUSTOMER
         Role customerRole = roleRepository.findByName("CUSTOMER")
                 .orElseThrow(() -> new RuntimeException("Vai trò CUSTOMER không tồn tại"));
@@ -101,7 +108,6 @@ public class AuthServiceImpl implements AuthService {
                 .email(registerRequest.getEmail())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .phoneNumber(registerRequest.getPhoneNumber())
-                .gender(registerRequest.getGender())
                 .active(true)
                 .role(customerRole)
                 .department(null)
