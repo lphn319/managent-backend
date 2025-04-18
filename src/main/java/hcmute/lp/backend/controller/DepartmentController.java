@@ -5,6 +5,7 @@ import hcmute.lp.backend.model.dto.department.DepartmentDto;
 import hcmute.lp.backend.model.dto.department.DepartmentRequest;
 import hcmute.lp.backend.service.DepartmentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +16,8 @@ import java.util.List;
 @RequestMapping("/api/v1/departments")
 @Tag(name = "Department API")
 public class DepartmentController {
-    private final DepartmentService departmentService;
-    public DepartmentController(DepartmentService departmentService) {
-        this.departmentService = departmentService;
-    }
+    @Autowired
+    private DepartmentService departmentService;
 
     // GET ALL DEPARTMENTS
     @GetMapping

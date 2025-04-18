@@ -75,11 +75,36 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public boolean existsById(int id) {
+
         return categoryRepository.existsById(id);
     }
 
     @Override
     public boolean existsByName(String name) {
         return categoryRepository.existsByName(name);
+    }
+
+    @Override
+    public CategoryDto updateCategoryStatus(int id, String status) {
+        Category category = categoryRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Category not found with id: " + id));
+        category.setStatus(Category.CategoryStatus.valueOf(status));
+        Category updatedCategory = categoryRepository.save(category);
+        return categoryMapper.toDto(updatedCategory);
+    }
+
+    @Override
+    public List<CategoryDto> getCategoriesByParentId(int parentId) {
+        return List.of();
+    }
+
+    @Override
+    public List<CategoryDto> getCategoriesByStatus(String status) {
+        return List.of();
+    }
+
+    @Override
+    public List<CategoryDto> getCategoriesByParentIdAndStatus(int parentId, String status) {
+        return List.of();
     }
 }
