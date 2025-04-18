@@ -37,8 +37,9 @@ public class User extends BaseEntity {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
-    @Column(name = "gender", nullable = false)
-    private String gender;
+    @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
+    private GenderType gender;
 
     @Column(name = "is_active", nullable = false)
     private boolean active = true;
@@ -50,4 +51,8 @@ public class User extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
+
+    public enum GenderType {
+        Male, Female, Other
+    }
 }
