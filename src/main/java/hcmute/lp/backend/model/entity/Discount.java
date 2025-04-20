@@ -42,6 +42,6 @@ public class Discount extends BaseEntity {
     private LocalDate endDate;
 
     @Column(name = "is_active", nullable = false)
-    private boolean active;
+    private boolean isActive;
 
 }
