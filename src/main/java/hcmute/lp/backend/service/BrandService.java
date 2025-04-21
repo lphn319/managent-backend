@@ -3,6 +3,7 @@ package hcmute.lp.backend.service;
 import hcmute.lp.backend.model.dto.brand.BrandDto;
 import hcmute.lp.backend.model.dto.brand.BrandRequest;
 import hcmute.lp.backend.model.entity.Brand;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Map;
@@ -20,4 +21,6 @@ public interface BrandService {
     List<BrandDto> getFeaturedBrands(int limit);
 
     Map<String, Integer> getBrandStatistics();
+
+    Page<BrandDto> getBrandsPaginated(int page, int size, String sortBy, String sortDirection, String status);
 }

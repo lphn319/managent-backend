@@ -8,6 +8,10 @@ import hcmute.lp.backend.model.mapper.CategoryMapper;
 import hcmute.lp.backend.repository.CategoryRepository;
 import hcmute.lp.backend.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -107,4 +111,31 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryDto> getCategoriesByParentIdAndStatus(int parentId, String status) {
         return List.of();
     }
+
+    @Override
+    public Page<CategoryDto> getCategoriesPaginated(int page, int size, String sortBy, String sortDirection, String status) {
+        // Tạo đối tượng Pageable với thông số phân trang
+        Sort.Direction direction = sortDirection.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortBy));
+
+        Page<Category> categoryPage;
+
+        // Nếu có tham số status, lọc theo status
+        if (status != null && !status.isEmpty()) {
+            try {
+                Category.CategoryStatus categoryStatus = Category.CategoryStatus.valueOf(status);
+                categoryPage = categoryRepository.findByStatus(categoryStatus, pageable);
+            } catch (IllegalArgumentException e) {
+                // Nếu status không hợp lệ, trả về tất cả
+                categoryPage = categoryRepository.findAll(pageable);
+            }
+        } else {
+            // Nếu không có tham số status, trả về tất cả
+            categoryPage = categoryRepository.findAll(pageable);
+        }
+
+        // Chuyển đổi Page<Category> thành Page<CategoryDto>
+        return categoryPage.map(categoryMapper::toDto);
+    }
+
 }

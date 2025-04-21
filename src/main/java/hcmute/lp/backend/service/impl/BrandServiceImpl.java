@@ -8,6 +8,10 @@ import hcmute.lp.backend.model.mapper.BrandMapper;
 import hcmute.lp.backend.repository.BrandRepository;
 import hcmute.lp.backend.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -136,5 +140,31 @@ public class BrandServiceImpl implements BrandService {
         statistics.put("inactiveBrands", allBrands.size() - activeBrands.size());
 
         return statistics;
+    }
+
+    @Override
+    public Page<BrandDto> getBrandsPaginated(int page, int size, String sortBy, String sortDirection, String status) {
+        // Tạo đối tượng Pageable với thông số phân trang
+        Sort.Direction direction = sortDirection.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortBy));
+
+        Page<Brand> brandPage;
+
+        // Nếu có tham số status, lọc theo status
+        if (status != null && !status.isEmpty()) {
+            try {
+                Brand.BrandStatus brandStatus = Brand.BrandStatus.valueOf(status);
+                brandPage = brandRepository.findByStatus(brandStatus, pageable);
+            } catch (IllegalArgumentException e) {
+                // Nếu status không hợp lệ, trả về tất cả
+                brandPage = brandRepository.findAll(pageable);
+            }
+        } else {
+            // Nếu không có tham số status, trả về tất cả
+            brandPage = brandRepository.findAll(pageable);
+        }
+
+        // Chuyển đổi Page<Brand> thành Page<BrandDto>
+        return brandPage.map(brandMapper::toDto);
     }
 }

@@ -2,6 +2,7 @@ package hcmute.lp.backend.service;
 
 import hcmute.lp.backend.model.dto.category.CategoryDto;
 import hcmute.lp.backend.model.dto.category.CategoryRequest;
+import org.springframework.data.domain.Page;
 
 
 import java.util.List;
@@ -20,4 +21,5 @@ public interface CategoryService {
     List<CategoryDto> getCategoriesByStatus(String status);
     List<CategoryDto> getCategoriesByParentIdAndStatus(int parentId, String status);
 
+    Page<CategoryDto> getCategoriesPaginated(int page, int size, String sortBy, String sortDirection, String status);
 }

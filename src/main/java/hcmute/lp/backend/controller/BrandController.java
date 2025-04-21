@@ -7,6 +7,7 @@ import hcmute.lp.backend.service.BrandService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -79,4 +80,15 @@ public class BrandController {
         return ResponseEntity.ok(statistics);
     }
 
+    @GetMapping("/pagination")
+    public ResponseEntity<ApiResponse<Page<BrandDto>>> getBrandsPaginated(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "name") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDirection,
+            @RequestParam(required = false) String status) {
+        Page<BrandDto> brandPage = brandService.getBrandsPaginated(
+                page, size, sortBy, sortDirection, status);
+        return ResponseEntity.ok(ApiResponse.success("Brands retrieved successfully", brandPage));
+    }
 }
