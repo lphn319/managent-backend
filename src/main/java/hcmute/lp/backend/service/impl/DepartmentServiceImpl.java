@@ -53,9 +53,9 @@ public class DepartmentServiceImpl implements DepartmentService {
         if (!department.getName().equals(departmentRequest.getName()) && departmentRepository.existsByName(departmentRequest.getName())) {
             throw new IllegalArgumentException("Department with this name already exists: " + departmentRequest.getName());
         }
-        departmentMapper.updateEntityFromRequest(department, departmentRequest);
+        departmentMapper.updateEntityFromRequest(departmentRequest, department);
         Department updatedDepartment = departmentRepository.save(department);
-        return null;
+        return departmentMapper.toDto(updatedDepartment);
     }
 
     @Override
