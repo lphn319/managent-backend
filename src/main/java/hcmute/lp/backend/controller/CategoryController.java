@@ -7,6 +7,7 @@ import hcmute.lp.backend.service.CategoryService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -64,5 +65,17 @@ public class CategoryController {
         String status = statusRequest.get("status");
         CategoryDto updatedCategory = categoryService.updateCategoryStatus(id, status);
         return ResponseEntity.ok(updatedCategory);
+    }
+
+    @GetMapping("/pagination")
+    public ResponseEntity<ApiResponse<Page<CategoryDto>>> getCategoriesPaginated(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "name") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDirection,
+            @RequestParam(required = false) String status) {
+        Page<CategoryDto> categoryPage = categoryService.getCategoriesPaginated(
+                page, size, sortBy, sortDirection, status);
+        return ResponseEntity.ok(ApiResponse.success("Categories retrieved successfully", categoryPage));
     }
 }
