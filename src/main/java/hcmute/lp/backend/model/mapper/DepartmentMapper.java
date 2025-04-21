@@ -3,31 +3,27 @@ package hcmute.lp.backend.model.mapper;
 import hcmute.lp.backend.model.dto.department.DepartmentDto;
 import hcmute.lp.backend.model.dto.department.DepartmentRequest;
 import hcmute.lp.backend.model.entity.Department;
-import org.springframework.stereotype.Component;
+import org.mapstruct.*;
 
-@Component
-public class DepartmentMapper {
-    public DepartmentDto toDto(Department department) {
-        return DepartmentDto.builder()
-                .id(department.getId())
-                .name(department.getName())
-                .description(department.getDescription())
-                .build();
-    }
+import java.util.List;
 
-    public Department toEntity(DepartmentRequest departmentRequest) {
-        Department department = new Department();
-        department.setName(departmentRequest.getName());
-        department.setDescription(departmentRequest.getDescription());
-        return department;
-    }
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface DepartmentMapper {
 
-    public void updateEntityFromRequest(Department department, DepartmentRequest departmentRequest) {
-        if (departmentRequest.getName() != null) {
-            department.setName(departmentRequest.getName());
-        }
-        if (departmentRequest.getDescription() != null) {
-            department.setDescription(departmentRequest.getDescription());
-        }
-    }
+    DepartmentMapper INSTANCE = org.mapstruct.factory.Mappers.getMapper(DepartmentMapper.class);
+
+    @Mapping(target = "employees", ignore = true)
+    Department toEntity(DepartmentRequest departmentRequest);
+
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
+    @Mapping(target = "description", source = "description")
+    DepartmentDto toDto(Department department);
+
+    List<DepartmentDto> toDtoList(List<Department> departments);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "employees", ignore = true)
+    void updateEntityFromRequest(DepartmentRequest departmentRequest, @MappingTarget Department department);
 }

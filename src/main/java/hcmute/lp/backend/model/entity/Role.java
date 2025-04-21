@@ -24,7 +24,9 @@ public class Role {
     @Column(name = "name")
     private String name;
 
-    @OneToMany
-    @JoinColumn(name = "role_id")
+    @ElementCollection
+    private List<String> permissions;
+
+    @OneToMany(mappedBy = "role")
     private List<User> user;
 }
