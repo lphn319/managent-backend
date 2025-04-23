@@ -8,6 +8,9 @@ import hcmute.lp.backend.model.mapper.DiscountMapper;
 import hcmute.lp.backend.repository.DiscountRepository;
 import hcmute.lp.backend.service.DiscountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -95,5 +98,12 @@ public class DiscountServiceImpl implements DiscountService {
         Discount discount = discountRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Discount not found with id: " + id));
         return discount.isActive();
+    }
+
+    @Override
+    public Page<DiscountDto> getDiscountsPaginated(int page, int size, String sortBy, String sortDirection) {
+        Sort.Direction direction = sortDirection.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+        Page<Discount> discountPage = discountRepository.findAll(PageRequest.of(page, size, Sort.by(direction, sortBy)));
+        return discountPage.map(discountMapper::toDto);
     }
 }
