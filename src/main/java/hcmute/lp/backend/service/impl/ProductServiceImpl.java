@@ -13,6 +13,10 @@ import hcmute.lp.backend.repository.ProductRepository;
 import hcmute.lp.backend.service.ProductService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +40,15 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDto> getAllProducts() {
         List<Product> products = productRepository.findAll();
         return productMapper.toDtoList(products);
+    }
+
+    @Override
+    public Page<ProductDto> getProductsPaginated(int page, int size, String sortBy, String sortDirection) {
+        Sort.Direction direction = sortDirection.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortBy));
+
+        Page<Product> productsPage = productRepository.findAll(pageable);
+        return productsPage.map(productMapper::toDto);
     }
 
     @Override

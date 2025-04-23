@@ -5,6 +5,7 @@ import hcmute.lp.backend.model.dto.product.ProductDto;
 import hcmute.lp.backend.model.dto.product.ProductRequest;
 import hcmute.lp.backend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -18,6 +19,16 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService productService;
+
+    @GetMapping("/paginated")
+    public ResponseEntity<ApiResponse<Page<ProductDto>>> getProductsPaginated(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDirection) {
+        Page<ProductDto> productsPage = productService.getProductsPaginated(page, size, sortBy, sortDirection);
+    return ResponseEntity.ok(ApiResponse.success("Products retrieved successfully", productsPage));
+    }
 
      //GET ALL PRODUCTS
      @GetMapping
