@@ -14,14 +14,5 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
     boolean existsById(Integer id);
 
-    List<Category> findByParentId(Integer parentId);
-    List<Category> findByParentIdIsNull();
-    List<Category> findByParentIdIsNotNull();
-    List<Category> findByParentIdAndStatus(Integer parentId, String status);
-    List<Category> findByParentIdIsNullAndStatus(String status);
-    List<Category> findByParentIdIsNotNullAndStatus(String status);
-
-    List<Category> findByStatus(String status);
-
     Page<Category> findByStatus(Category.CategoryStatus status, Pageable pageable);
 }

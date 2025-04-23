@@ -3,10 +3,13 @@ package hcmute.lp.backend.repository;
 import hcmute.lp.backend.model.entity.Department;
 import hcmute.lp.backend.model.entity.Role;
 import hcmute.lp.backend.model.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -35,4 +38,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT NEW map(d.name as departmentName, COUNT(u) as count) FROM User u JOIN u.department d GROUP BY d.name")
     List<Map<String, Object>> getDepartmentCounts();
+
+    Page<User> getAllEmployees(Pageable pageable);
+
+    Page<User> findByNameIn(Collection<String> names, Pageable pageable);
 }

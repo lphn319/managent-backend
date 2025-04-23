@@ -14,6 +14,9 @@ import hcmute.lp.backend.repository.UserRepository;
 import hcmute.lp.backend.security.SecurityUtils;
 import hcmute.lp.backend.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +47,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private SecurityUtils securityUtils;
+
+    @Override
+    public Page<UserDto> getEmployeePaginated(int page, int size, String sortBy, String sortDirection) {
+        Sort.Direction direction = sortDirection.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+        Page<User> employeePage = userRepository.findByNameIn(Arrays.asList("EMPLOYEE", "MANAGER"),
+                PageRequest.of(page, size, Sort.by(direction, sortBy)));
+        return employeePage.map(userMapper::toDto);
+    }
 
     @Override
     public List<UserDto> getAllEmployees() {
@@ -98,7 +109,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         User employee = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy nhân viên"));
 
-        // Kiểm tra quyền (nếu cần)
+        // Kiểm tra quyền
         if (!securityUtils.canModifyResource(employee.getId()) && !securityUtils.hasRole("ADMIN")) {
             throw new UnauthorizedException("Bạn không có quyền cập nhật thông tin nhân viên này");
         }
