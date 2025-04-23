@@ -23,6 +23,18 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @GetMapping("/pagination")
+    public ResponseEntity<ApiResponse<Page<CategoryDto>>> getCategoriesPaginated(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "name") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortDirection,
+            @RequestParam(required = false) String status) {
+        Page<CategoryDto> categoryPage = categoryService.getCategoriesPaginated(
+                page, size, sortBy, sortDirection, status);
+        return ResponseEntity.ok(ApiResponse.success("Categories retrieved successfully", categoryPage));
+    }
+
     // GET ALL CATEGORIES
     @GetMapping
     public ResponseEntity<ApiResponse<List<CategoryDto>>> getAllCategories() {
@@ -67,15 +79,5 @@ public class CategoryController {
         return ResponseEntity.ok(updatedCategory);
     }
 
-    @GetMapping("/pagination")
-    public ResponseEntity<ApiResponse<Page<CategoryDto>>> getCategoriesPaginated(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "name") String sortBy,
-            @RequestParam(defaultValue = "asc") String sortDirection,
-            @RequestParam(required = false) String status) {
-        Page<CategoryDto> categoryPage = categoryService.getCategoriesPaginated(
-                page, size, sortBy, sortDirection, status);
-        return ResponseEntity.ok(ApiResponse.success("Categories retrieved successfully", categoryPage));
-    }
+
 }
