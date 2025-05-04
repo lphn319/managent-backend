@@ -57,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
             User user = userDetails.getUser();
 
             // Kiểm tra trạng thái hoạt động của tài khoản
-            if (!user.isActive()) {
+            if (user.getStatus() != User.UserStatus.ACTIVE) {
                 throw new UnauthorizedException("Tài khoản đã bị vô hiệu hóa");
             }
 
@@ -108,7 +108,7 @@ public class AuthServiceImpl implements AuthService {
                 .email(registerRequest.getEmail())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .phoneNumber(registerRequest.getPhoneNumber())
-                .active(true)
+                .status(User.UserStatus.ACTIVE)  // Đổi từ isActive(true) sang status(ACTIVE)
                 .role(customerRole)
                 .department(null)
                 .createdAt(LocalDateTime.now())

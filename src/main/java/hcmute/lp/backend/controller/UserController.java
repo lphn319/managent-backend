@@ -7,7 +7,6 @@ import hcmute.lp.backend.security.annotation.HasAnyRole;
 import hcmute.lp.backend.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

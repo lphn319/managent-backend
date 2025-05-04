@@ -1,3 +1,4 @@
+// UserMapper.java
 package hcmute.lp.backend.model.mapper;
 
 import hcmute.lp.backend.model.dto.user.UserDto;
@@ -22,12 +23,12 @@ public interface UserMapper {
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "createdBy", ignore = true)
     @Mapping(target = "lastModifiedBy", ignore = true)
-    @Mapping(target = "active", constant = "true")
+    @Mapping(target = "status", constant = "ACTIVE")
     User toEntity(UserRequest userRequest, Role role, Department department);
 
     @Mapping(target = "roleName", source = "role.name")
     @Mapping(target = "departmentName", expression = "java(user.getDepartment() != null ? user.getDepartment().getName() : null)")
-    @Mapping(target = "isActive", source = "active")
+    @Mapping(target = "status", source = "status")
     @Mapping(target = "dateOfBirth", source = "dateOfBirth")
     UserDto toDto(User user);
 
