@@ -12,9 +12,7 @@ import hcmute.lp.backend.repository.DepartmentRepository;
 import hcmute.lp.backend.repository.RoleRepository;
 import hcmute.lp.backend.repository.UserRepository;
 import hcmute.lp.backend.security.SecurityUtils;
-
 import hcmute.lp.backend.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -64,6 +62,9 @@ public class UserServiceImpl implements UserService {
         // Chuyển đổi request thành entity
         User user = userMapper.toEntity(userRequest, role, department);
 
+        // Đặt trạng thái mặc định là ACTIVE
+        user.setStatus(User.UserStatus.ACTIVE);
+
         // Lưu vào database
         user = userRepository.save(user);
 
@@ -111,6 +112,11 @@ public class UserServiceImpl implements UserService {
 
         // Cập nhật thông tin người dùng
         userMapper.updateUserFromRequest(userRequest, user, role, department);
+
+        // Cập nhật status nếu có trong request
+        if (userRequest.getStatus() != null) {
+            user.setStatus(userRequest.getStatus());
+        }
 
         // Lưu vào database
         user = userRepository.save(user);
@@ -165,7 +171,8 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy người dùng"));
 
-        user.setActive(isActive);
+        // Đổi sang sử dụng enum
+        user.setStatus(isActive ? User.UserStatus.ACTIVE : User.UserStatus.INACTIVE);
         userRepository.save(user);
     }
 }

@@ -1,3 +1,4 @@
+// User.java
 package hcmute.lp.backend.model.entity;
 
 import hcmute.lp.backend.model.common.BaseEntity;
@@ -41,8 +42,9 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private GenderType gender;
 
-    @Column(name = "is_active", nullable = false)
-    private boolean active = true;
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UserStatus status = UserStatus.ACTIVE; // Default value
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
@@ -53,6 +55,21 @@ public class User extends BaseEntity {
     private Department department;
 
     public enum GenderType {
-        Male, Female, Other
+        MALE, FEMALE, OTHER
+    }
+
+    public enum UserStatus {
+        ACTIVE, INACTIVE
+    }
+
+    // Helper method for backward compatibility
+    @Transient
+    public boolean isActive() {
+        return this.status == UserStatus.ACTIVE;
+    }
+
+    // Helper method for backward compatibility
+    public void setActive(boolean active) {
+        this.status = active ? UserStatus.ACTIVE : UserStatus.INACTIVE;
     }
 }

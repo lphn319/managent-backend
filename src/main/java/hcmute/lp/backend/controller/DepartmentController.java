@@ -37,7 +37,7 @@ public class DepartmentController {
     }
 
     @PostMapping
-    @HasAnyRole({"ADMIN"})
+//    @HasAnyRole({"ADMIN"})
     public ResponseEntity<ApiResponse<DepartmentDto>> createDepartment(@Valid @RequestBody DepartmentRequest departmentRequest) {
         DepartmentDto createdDepartment = departmentService.createDepartment(departmentRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Department created", createdDepartment));

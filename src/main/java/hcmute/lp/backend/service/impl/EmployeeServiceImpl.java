@@ -16,6 +16,7 @@ import hcmute.lp.backend.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -49,10 +50,57 @@ public class EmployeeServiceImpl implements EmployeeService {
     private SecurityUtils securityUtils;
 
     @Override
-    public Page<UserDto> getEmployeePaginated(int page, int size, String sortBy, String sortDirection) {
+    public Page<UserDto> getEmployeesPaginated(
+            int page,
+            int size,
+            String sortBy,
+            String sortDirection,
+            String keyword,
+            Integer departmentId,
+            Boolean isActive) {
+
         Sort.Direction direction = sortDirection.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
-        Page<User> employeePage = userRepository.findByNameIn(Arrays.asList("EMPLOYEE", "MANAGER"),
-                PageRequest.of(page, size, Sort.by(direction, sortBy)));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortBy));
+
+        // Lấy các vai trò nhân viên (EMPLOYEE, MANAGER)
+        List<Role> employeeRoles = roleRepository.findByNameIn(Arrays.asList("EMPLOYEE", "MANAGER"));
+
+        Page<User> employeePage;
+
+        // Chuyển đổi Boolean isActive thành User.UserStatus
+        User.UserStatus status = null;
+        if (isActive != null) {
+            status = isActive ? User.UserStatus.ACTIVE : User.UserStatus.INACTIVE;
+        }
+
+        // Xử lý các trường hợp lọc khác nhau
+        if (keyword != null && !keyword.isEmpty() && departmentId != null && status != null) {
+            // Lọc theo từ khóa, phòng ban và trạng thái
+            Department department = departmentRepository.findById(departmentId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy phòng ban"));
+            employeePage = userRepository.findByKeywordAndRoleInAndDepartmentAndStatus(
+                    keyword, employeeRoles, department, status, pageable);
+        } else if (keyword != null && !keyword.isEmpty() && status != null) {
+            // Lọc theo từ khóa và trạng thái
+            employeePage = userRepository.findByKeywordAndRoleInAndStatus(
+                    keyword, employeeRoles, status, pageable);
+        } else if (keyword != null && !keyword.isEmpty()) {
+            // Lọc chỉ theo từ khóa
+            employeePage = userRepository.findByKeywordAndRoleIn(keyword, employeeRoles, pageable);
+        } else if (departmentId != null) {
+            // Lọc chỉ theo phòng ban
+            Department department = departmentRepository.findById(departmentId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy phòng ban"));
+            employeePage = userRepository.findByDepartment(department, pageable);
+        } else if (status != null) {
+            // Lọc chỉ theo trạng thái
+            employeePage = userRepository.findByStatus(status, pageable);
+        } else {
+            // Không có điều kiện lọc, trả về tất cả nhân viên
+            employeePage = userRepository.findByRoleIn(employeeRoles, pageable);
+        }
+
+        // Chuyển đổi Page<User> thành Page<UserDto>
         return employeePage.map(userMapper::toDto);
     }
 
@@ -93,7 +141,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy phòng ban"));
 
         // Mã hóa mật khẩu
-        employeeRequest.setPassword(passwordEncoder.encode(employeeRequest.getPassword()));
+        String encodedPassword = passwordEncoder.encode(employeeRequest.getPassword());
+        employeeRequest.setPassword(encodedPassword);
 
         // Chuyển thành entity và lưu
         User employee = userMapper.toEntity(employeeRequest, role, department);
@@ -141,6 +190,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         // Cập nhật thông tin
         userMapper.updateUserFromRequest(employeeRequest, employee, role, department);
+
+        // THÊM: Cập nhật status nếu có trong request
+        if (employeeRequest.getStatus() != null) {
+            employee.setStatus(employeeRequest.getStatus());
+        }
+
         employee = userRepository.save(employee);
 
         return userMapper.toDto(employee);
@@ -170,7 +225,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public void changeEmployeeStatus(Long id, boolean isActive) {
+    public void changeEmployeeStatus(Long id, User.UserStatus status) {
         // Kiểm tra quyền
         if (!securityUtils.hasRole("ADMIN")) {
             throw new UnauthorizedException("Bạn không có quyền thay đổi trạng thái nhân viên");
@@ -179,7 +234,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         User employee = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy nhân viên"));
 
-        employee.setActive(isActive);
+        employee.setStatus(status);
         userRepository.save(employee);
     }
 
@@ -187,25 +242,31 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Map<String, Object> getEmployeeStatistics() {
         Map<String, Object> statistics = new HashMap<>();
 
+        // Lấy các vai trò nhân viên (EMPLOYEE, MANAGER)
+        List<Role> employeeRoles = roleRepository.findByNameIn(Arrays.asList("EMPLOYEE", "MANAGER"));
+        List<User> employees = userRepository.findByRoleIn(employeeRoles);
+
         // Tổng số nhân viên
-        long totalEmployees = userRepository.count();
+        int totalEmployees = employees.size();
         statistics.put("total", totalEmployees);
 
         // Số nhân viên đang hoạt động
-        long activeEmployees = userRepository.countByActiveTrue();
+        int activeEmployees = (int) employees.stream()
+                .filter(e -> e.getStatus() == User.UserStatus.ACTIVE)
+                .count();
         statistics.put("active", activeEmployees);
 
         // Số nhân viên không hoạt động
-        long inactiveEmployees = userRepository.countByActiveFalse();
+        int inactiveEmployees = totalEmployees - activeEmployees;
         statistics.put("inactive", inactiveEmployees);
 
         // Thống kê theo phòng ban
         List<Map<String, Object>> departmentCountsList = userRepository.getDepartmentCounts();
-        Map<String, Long> departmentStats = new HashMap<>();
+        Map<String, Integer> departmentStats = new HashMap<>();
 
         for (Map<String, Object> item : departmentCountsList) {
             String deptName = (String) item.get("departmentName");
-            Long count = ((Number) item.get("count")).longValue();
+            Integer count = ((Number) item.get("count")).intValue();
             departmentStats.put(deptName, count);
         }
 
@@ -226,7 +287,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<UserDto> getEmployeesByStatus(boolean isActive) {
-        return userRepository.findByActive(isActive).stream()
+        User.UserStatus status = isActive ? User.UserStatus.ACTIVE : User.UserStatus.INACTIVE;
+        return userRepository.findByStatus(status).stream()
                 .map(userMapper::toDto)
                 .collect(Collectors.toList());
     }
