@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Admin User",
+    "email": "admin@example.com",
+    "phoneNumber": "0901234567",
+    "password": "admin123",
+    "dateOfBirth": "1990-01-01",
+    "gender": "MALE",
+    "roleId": 1,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Manager User",
+    "email": "manager@example.com",
+    "phoneNumber": "0912345678",
+    "password": "manager123",
+    "dateOfBirth": "1985-05-15",
+    "gender": "FEMALE",
+    "departmentId": 2,
+    "roleId": 2,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Employee User",
+    "email": "employee@example.com",
+    "phoneNumber": "0912345678",
+    "password": "employee123",
+    "dateOfBirth": "1985-05-15",
+    "gender": "FEMALE",
+    "departmentId": 2,
+    "roleId": 2,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Customer User",
+    "email": "customer@example.com",
+    "phoneNumber": "0923456789",
+    "password": "customer123",
+    "dateOfBirth": "1995-08-20",
+    "gender": "MALE",
+    "roleId": 4,
+    "status": "ACTIVE"
+  }
+]
