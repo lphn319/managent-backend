@@ -1,0 +1,18 @@
+[
+  {
+    "name": "ADMIN",
+    "permissions": []
+  },
+  {
+    "name": "MANAGER",
+    "permissions": []
+  },
+  {
+    "name": "EMPLOYEE",
+    "permissions": []
+  },
+  {
+    "name": "CUSTOMER",
+    "permissions": []
+  }
+]

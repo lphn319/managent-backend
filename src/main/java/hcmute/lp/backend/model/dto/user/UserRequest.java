@@ -28,15 +28,14 @@ public class UserRequest {
     @Pattern(regexp = "^(0|\\+84)[0-9]{9}$", message = "Số điện thoại không hợp lệ")
     private String phoneNumber;
 
+    @NotBlank(message = "Mật khẩu không được để trống")
     private String password;
 
-    @NotNull(message = "Ngày sinh không được để trống")
     private LocalDate dateOfBirth;
 
     @NotBlank(message = "Giới tính không được để trống")
     private String gender;
 
-    @NotNull(message = "Phòng ban không được để trống")
     private Integer departmentId;
 
     @NotNull(message = "Vai trò không được để trống")
