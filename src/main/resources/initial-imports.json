@@ -1,0 +1,51 @@
+[
+  {
+    "supplierId": 1,
+    "employeeId": 3,
+    "status": "completed",
+    "notes": "Nhập hàng Samsung quý 2/2025",
+    "importDetails": [
+      {
+        "productId": 2,
+        "quantity": 30,
+        "price": 25000000
+      },
+      {
+        "productId": 5,
+        "quantity": 15,
+        "price": 20000000
+      }
+    ]
+  },
+  {
+    "supplierId": 2,
+    "employeeId": 2,
+    "status": "completed",
+    "notes": "Nhập hàng Apple quý 2/2025",
+    "importDetails": [
+      {
+        "productId": 1,
+        "quantity": 20,
+        "price": 25000000
+      },
+      {
+        "productId": 4,
+        "quantity": 10,
+        "price": 55000000
+      }
+    ]
+  },
+  {
+    "supplierId": 3,
+    "employeeId": 3,
+    "status": "processing",
+    "notes": "Nhập hàng Sony đợt 1 - tháng 5/2025",
+    "importDetails": [
+      {
+        "productId": 3,
+        "quantity": 15,
+        "price": 6500000
+      }
+    ]
+  }
+]
