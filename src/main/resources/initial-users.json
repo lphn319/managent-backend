@@ -23,12 +23,12 @@
   {
     "name": "Employee User",
     "email": "employee@example.com",
-    "phoneNumber": "0912345678",
+    "phoneNumber": "0912345679",
     "password": "employee123",
     "dateOfBirth": "1985-05-15",
     "gender": "FEMALE",
     "departmentId": 2,
-    "roleId": 2,
+    "roleId": 3,
     "status": "ACTIVE"
   },
   {

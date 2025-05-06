@@ -1,7 +1,5 @@
 package hcmute.lp.backend.model.entity;
 
-
-import hcmute.lp.backend.model.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
