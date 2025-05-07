@@ -27,8 +27,8 @@ public class ImportController {
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy,
             @RequestParam(defaultValue = "desc") String sortDirection,
-            @RequestParam(required = false) Long supplierId, // Thay đổi từ Integer sang Long
-            @RequestParam(required = false) Long employeeId, // Thay đổi từ Integer sang Long
+            @RequestParam(required = false) Long supplierId,
+            @RequestParam(required = false) Long employeeId,
             @RequestParam(required = false) String status) {
 
         Page<ImportDto> importsPage = importService.getImportsPaginated(
