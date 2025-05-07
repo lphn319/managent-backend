@@ -1,0 +1,47 @@
+[
+  {
+    "name": "iPhone 15 Pro",
+    "description": "Điện thoại cao cấp mới nhất từ Apple với chip A17 Pro và camera độ phân giải cao",
+    "price": 28990000,
+    "imageUrl": "https://example.com/iphone-15-pro.jpg",
+    "quantity": 50,
+    "categoryIds": [1],
+    "brandId": 1
+  },
+  {
+    "name": "Samsung Galaxy S24 Ultra",
+    "description": "Smartphone flagship của Samsung với bút S-Pen và camera 200MP",
+    "price": 29990000,
+    "imageUrl": "https://example.com/galaxy-s24-ultra.jpg",
+    "quantity": 40,
+    "categoryIds": [1],
+    "brandId": 2
+  },
+  {
+    "name": "Sony WH-1000XM5",
+    "description": "Tai nghe chống ồn cao cấp với công nghệ DSEE Extreme",
+    "price": 7990000,
+    "imageUrl": "https://example.com/sony-wh1000xm5.jpg",
+    "quantity": 30,
+    "categoryIds": [3],
+    "brandId": 3
+  },
+  {
+    "name": "MacBook Pro 16",
+    "description": "Laptop mạnh mẽ với chip M3 Pro, màn hình Liquid Retina XDR",
+    "price": 59990000,
+    "imageUrl": "https://example.com/macbook-pro-16.jpg",
+    "quantity": 25,
+    "categoryIds": [4],
+    "brandId": 1
+  },
+  {
+    "name": "Samsung Galaxy Tab S9+",
+    "description": "Máy tính bảng cao cấp với bút S-Pen và màn hình AMOLED 12.4 inch",
+    "price": 24990000,
+    "imageUrl": "https://example.com/galaxy-tab-s9-plus.jpg",
+    "quantity": 20,
+    "categoryIds": [5],
+    "brandId": 2
+  }
+]

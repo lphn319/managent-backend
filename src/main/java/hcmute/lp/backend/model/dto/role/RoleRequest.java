@@ -19,6 +19,6 @@ public class RoleRequest {
     @Size(min = 3, max = 50, message = "Role name must be between 3 and 50 characters")
     private String name;
 
-    @NotEmpty(message = "Permissions are required")
-    private List<String> permissions;
+//    @NotEmpty(message = "Permissions are required")
+//    private List<String> permissions;
 }
