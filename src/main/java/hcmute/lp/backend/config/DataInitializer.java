@@ -29,7 +29,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Component
@@ -70,8 +69,6 @@ public class DataInitializer implements CommandLineRunner {
     private UserMapper userMapper;
     @Autowired
     private SupplierMapper supplierMapper;
-    @Autowired
-    private ImportMapper importMapper;
     @PersistenceContext
     protected EntityManager entityManager;
 
@@ -206,6 +203,7 @@ public class DataInitializer implements CommandLineRunner {
                 List<Department> savedDepartments = departmentRepository.saveAll(departments);
                 entityManager.flush();
                 entityManager.clear();
+
                 log.info("Successfully initialized {} departments", savedDepartments.size());
 
                 // Log IDs để dễ dàng debug
@@ -259,18 +257,6 @@ public class DataInitializer implements CommandLineRunner {
                 List<User> users = new ArrayList<>();
                 for (UserRequest request : userRequests) {
                     try {
-//                        // Tìm role
-//                        String roleName = getRoleNameFromId(request.getRoleId());
-//                        Role role = roleRepository.findByName(roleName)
-//                                .orElseThrow(() -> new RuntimeException("Role not found with name: " + roleName));
-//
-//                        // Tìm department nếu có
-//                        Department department = null;
-//                        if (request.getDepartmentId() != null) {
-//                            String departmentName = getDepartmentNameFromId(request.getDepartmentId());
-//                            department = departmentRepository.findByName(departmentName)
-//                                    .orElse(null);
-//                        }
                         Role role = roleRepository.findById(request.getRoleId())
                                 .orElseThrow(() -> new RuntimeException("Role not found with id: " + request.getRoleId()));
 

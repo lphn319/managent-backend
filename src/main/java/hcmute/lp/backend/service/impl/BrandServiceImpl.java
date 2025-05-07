@@ -86,7 +86,7 @@ public class BrandServiceImpl implements BrandService {
             throw new IllegalArgumentException("Brand with this name already exists: " + brandRequest.getName());
         }
 
-        brandMapper.updateEntityFromRequest(brand, brandRequest);
+        brandMapper.updateEntityFromRequest(brandRequest, brand);
         Brand updatedBrand = brandRepository.save(brand);
         return brandMapper.toDto(updatedBrand);
     }
