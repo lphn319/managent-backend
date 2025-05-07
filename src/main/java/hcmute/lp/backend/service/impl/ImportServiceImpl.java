@@ -257,7 +257,7 @@ public class ImportServiceImpl implements ImportService {
 
             newDetails.add(detail);
 
-            // Update product quantity only if new status is not CANCELLED
+            // Update product quantity only if the new status is not CANCELLED
             ImportStatus newStatus = importEntity.getStatus();
             if (newStatus != ImportStatus.CANCELLED) {
                 product.setQuantity(product.getQuantity() + detailRequest.getQuantity());

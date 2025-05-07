@@ -24,7 +24,7 @@ public interface ImportMapper {
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "createdBy", ignore = true)
     @Mapping(target = "lastModifiedBy", ignore = true)
-    @Mapping(target = "status", ignore = true) // Status được thiết lập riêng trong service
+    @Mapping(target = "status", ignore = true)
     Import toEntity(ImportRequest importRequest);
 
     @Mapping(target = "product", source = "product")

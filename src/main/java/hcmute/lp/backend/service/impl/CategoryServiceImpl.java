@@ -63,7 +63,7 @@ public class CategoryServiceImpl implements CategoryService {
             throw new IllegalArgumentException("Category with this name already exists: " + categoryRequest.getName());
         }
 
-        categoryMapper.updateEntityFromRequest(category, categoryRequest);
+        categoryMapper.updateEntityFromRequest(categoryRequest, category);
         Category updatedCategory = categoryRepository.save(category);
         return categoryMapper.toDto(updatedCategory);
     }

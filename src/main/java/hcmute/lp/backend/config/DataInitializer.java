@@ -14,6 +14,8 @@ import hcmute.lp.backend.model.dto.user.UserRequest;
 import hcmute.lp.backend.model.entity.*;
 import hcmute.lp.backend.model.mapper.*;
 import hcmute.lp.backend.repository.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -27,7 +29,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Component
@@ -68,8 +69,8 @@ public class DataInitializer implements CommandLineRunner {
     private UserMapper userMapper;
     @Autowired
     private SupplierMapper supplierMapper;
-    @Autowired
-    private ImportMapper importMapper;
+    @PersistenceContext
+    protected EntityManager entityManager;
 
     @Override
     @Transactional
@@ -200,6 +201,9 @@ public class DataInitializer implements CommandLineRunner {
                         .toList();
 
                 List<Department> savedDepartments = departmentRepository.saveAll(departments);
+                entityManager.flush();
+                entityManager.clear();
+
                 log.info("Successfully initialized {} departments", savedDepartments.size());
 
                 // Log IDs để dễ dàng debug
@@ -225,6 +229,8 @@ public class DataInitializer implements CommandLineRunner {
 
                 // Lưu roles
                 List<Role> savedRoles = roleRepository.saveAll(roles);
+                entityManager.flush();
+                entityManager.clear();
 
                 // Log để debug
                 log.info("Saved {} roles", savedRoles.size());
@@ -251,17 +257,13 @@ public class DataInitializer implements CommandLineRunner {
                 List<User> users = new ArrayList<>();
                 for (UserRequest request : userRequests) {
                     try {
-                        // Tìm role
-                        String roleName = getRoleNameFromId(request.getRoleId());
-                        Role role = roleRepository.findByName(roleName)
-                                .orElseThrow(() -> new RuntimeException("Role not found with name: " + roleName));
+                        Role role = roleRepository.findById(request.getRoleId())
+                                .orElseThrow(() -> new RuntimeException("Role not found with id: " + request.getRoleId()));
 
-                        // Tìm department nếu có
                         Department department = null;
                         if (request.getDepartmentId() != null) {
-                            String departmentName = getDepartmentNameFromId(request.getDepartmentId());
-                            department = departmentRepository.findByName(departmentName)
-                                    .orElse(null);
+                            department = departmentRepository.findById(request.getDepartmentId())
+                                    .orElseThrow(() -> new RuntimeException("Department not found with id: " + request.getDepartmentId()));
                         }
 
                         // Mã hóa mật khẩu
@@ -401,38 +403,6 @@ public class DataInitializer implements CommandLineRunner {
             } catch (IOException e) {
                 log.error("Failed to initialize imports from JSON file", e);
             }
-        }
-    }
-
-    private String getRoleNameFromId(Long roleId) {
-        switch (roleId.intValue()) {
-            case 1:
-                return "ADMIN";
-            case 2:
-                return "MANAGER";
-            case 3:
-                return "EMPLOYEE";
-            case 4:
-                return "CUSTOMER";
-            default:
-                throw new RuntimeException("Unknown role ID: " + roleId);
-        }
-    }
-
-    private String getDepartmentNameFromId(Integer departmentId) {
-        switch (departmentId) {
-            case 1:
-                return "IT Department";
-            case 2:
-                return "HR Department";
-            case 3:
-                return "Sales Department";
-            case 4:
-                return "Finance Department";
-            case 5:
-                return "Operations Department";
-            default:
-                throw new RuntimeException("Unknown department ID: " + departmentId);
         }
     }
 
