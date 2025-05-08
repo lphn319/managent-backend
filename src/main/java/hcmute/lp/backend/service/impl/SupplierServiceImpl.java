@@ -54,12 +54,6 @@ public class SupplierServiceImpl implements SupplierService {
         }
 
         Supplier supplier = supplierMapper.toEntity(supplierRequest);
-
-        // Đặt giá trị mặc định cho status nếu chưa có
-        if (supplier.getStatus() == null) {
-            supplier.setStatus(Supplier.SupplierStatus.ACTIVE);
-        }
-
         Supplier savedSupplier = supplierRepository.save(supplier);
         return supplierMapper.toDto(savedSupplier);
     }
@@ -105,12 +99,6 @@ public class SupplierServiceImpl implements SupplierService {
         Supplier supplier = supplierRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Supplier not found with id: " + id));
 
-        try {
-            supplier.setStatus(Supplier.SupplierStatus.valueOf(status.toUpperCase()));
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Invalid status value: " + status);
-        }
-
         Supplier updatedSupplier = supplierRepository.save(supplier);
         return supplierMapper.toDto(updatedSupplier);
     }
@@ -134,23 +122,4 @@ public class SupplierServiceImpl implements SupplierService {
         return supplierMapper.toDto(updatedSupplier);
     }
 
-    @Override
-    public Page<SupplierDto> getSuppliersPaginated(int page, int size, String sortBy, String sortDirection, String keyword) {
-        // Tạo đối tượng Pageable với thông số phân trang
-        Sort.Direction direction = sortDirection.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
-        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortBy));
-
-        Page<Supplier> supplierPage;
-
-        // Nếu có từ khóa tìm kiếm
-        if (keyword != null && !keyword.isEmpty()) {
-            supplierPage = supplierRepository.findByCompanyNameContaining(keyword, pageable);
-        } else {
-            // Nếu không có từ khóa, trả về tất cả
-            supplierPage = supplierRepository.findAll(pageable);
-        }
-
-        // Chuyển đổi Page<Supplier> thành Page<SupplierDto>
-        return supplierPage.map(supplierMapper::toDto);
-    }
 }

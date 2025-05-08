@@ -2,6 +2,7 @@
 package hcmute.lp.backend.model.entity;
 
 import hcmute.lp.backend.model.common.BaseEntity;
+import hcmute.lp.backend.model.common.CommonCategories;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -31,17 +32,15 @@ public class User extends BaseEntity {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @Column(name= "password", nullable = false)
+    private String password;
 
     @Column(name = "status", nullable = false)
     private String status;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles = new HashSet<>();
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -55,30 +54,35 @@ public class User extends BaseEntity {
 
     // Helper method để kiểm tra quyền
     public boolean hasPermission(String permissionCode) {
-        // Kiểm tra quyền từ tất cả các role
-        for (Role role : roles) {
-            if (role.hasPermission(permissionCode)) {
-                return true;
-            }
+        // Check permissions from the role
+        if (role != null && role.hasPermission(permissionCode)) {
+            return true;
         }
 
-        // Kiểm tra quyền bổ sung
+        // Check additional permissions
         return additionalPermissions.stream()
                 .anyMatch(p -> p.getCode().equals(permissionCode));
     }
 
-    // Helper method để lấy tất cả quyền
     public Set<Permission> getAllPermissions() {
         Set<Permission> allPermissions = new HashSet<>();
 
-        // Thêm quyền từ tất cả các role
-        for (Role role : roles) {
+        // Add permissions from the role
+        if (role != null) {
             allPermissions.addAll(role.getPermissions());
         }
 
-        // Thêm quyền bổ sung
+        // Add additional permissions
         allPermissions.addAll(additionalPermissions);
 
         return allPermissions;
+    }
+
+    // Helper method to check the value of status
+    public boolean isActive() {
+        return CommonCategories.UserStatus.ACTIVE.equals(this.status);
+    }
+    public boolean isInactive() {
+        return CommonCategories.UserStatus.INACTIVE.equals(this.status);
     }
 }

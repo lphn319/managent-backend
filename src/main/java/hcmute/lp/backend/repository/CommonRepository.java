@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CommonRepository extends JpaRepository<Common, Integer> {
-    List<Common> findByCategory(String category);
-    Optional<Common> findByCategoryAndValue(String category, String value);
+
 }
 
 

@@ -1,6 +1,7 @@
 package hcmute.lp.backend.service.impl;
 
 import hcmute.lp.backend.exception.UnauthorizedException;
+import hcmute.lp.backend.model.common.CommonCategories;
 import hcmute.lp.backend.model.dto.auth.AuthResponse;
 import hcmute.lp.backend.model.dto.auth.LoginRequest;
 import hcmute.lp.backend.model.dto.auth.RegisterRequest;
@@ -57,7 +58,7 @@ public class AuthServiceImpl implements AuthService {
             User user = userDetails.getUser();
 
             // Kiểm tra trạng thái hoạt động của tài khoản
-            if (user.getStatus() != User.UserStatus.ACTIVE) {
+            if (user.getStatus() != CommonCategories.UserStatus.ACTIVE) {
                 throw new UnauthorizedException("Tài khoản đã bị vô hiệu hóa");
             }
 
@@ -86,52 +87,53 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponse register(RegisterRequest registerRequest) throws BadRequestException {
-        // Kiểm tra email đã tồn tại chưa
-        if (userRepository.existsByEmail(registerRequest.getEmail())) {
-            throw new BadRequestException("Email đã được sử dụng");
-        }
-
-        // Kiểm tra số điện thoại có hợp lệ không (nếu được cung cấp)
-        if (registerRequest.getPhoneNumber() != null && !registerRequest.getPhoneNumber().isEmpty()) {
-            if (userRepository.existsByPhoneNumber(registerRequest.getPhoneNumber())) {
-                throw new BadRequestException("Số điện thoại đã được sử dụng");
-            }
-        }
-
-        // Lấy vai trò CUSTOMER
-        Role customerRole = roleRepository.findByName("CUSTOMER")
-                .orElseThrow(() -> new RuntimeException("Vai trò CUSTOMER không tồn tại"));
-
-        // Tạo đối tượng User từ thông tin đăng ký
-        User user = User.builder()
-                .name(registerRequest.getName())
-                .email(registerRequest.getEmail())
-                .password(passwordEncoder.encode(registerRequest.getPassword()))
-                .phoneNumber(registerRequest.getPhoneNumber())
-                .status(User.UserStatus.ACTIVE)  // Đổi từ isActive(true) sang status(ACTIVE)
-                .role(customerRole)
-                .department(null)
-                .createdAt(LocalDateTime.now())
-                .build();
-
-        // Lưu người dùng vào cơ sở dữ liệu
-        User savedUser = userRepository.save(user);
-
-        // Tạo UserDetails để tạo token
-        CustomUserDetails userDetails = new CustomUserDetails(savedUser);
-
-        // Tạo token JWT (không sử dụng rememberMe cho đăng ký)
-        String accessToken = jwtService.generateToken(userDetails, false);
-        String refreshToken = jwtService.generateRefreshToken(userDetails, false);
-
-        // Ghi log sự kiện đăng ký thành công
-        log.info("Đăng ký thành công cho email: {}", registerRequest.getEmail());
-
-        // Tạo đối tượng phản hồi
-        return AuthResponse.builder()
-                .accessToken(accessToken)
-                .refreshToken(refreshToken)
-                .user(userMapper.toDto(savedUser))
-                .build();
+//        // Kiểm tra email đã tồn tại chưa
+//        if (userRepository.existsByEmail(registerRequest.getEmail())) {
+//            throw new BadRequestException("Email đã được sử dụng");
+//        }
+//
+//        // Kiểm tra số điện thoại có hợp lệ không (nếu được cung cấp)
+//        if (registerRequest.getPhoneNumber() != null && !registerRequest.getPhoneNumber().isEmpty()) {
+//            if (userRepository.existsByPhoneNumber(registerRequest.getPhoneNumber())) {
+//                throw new BadRequestException("Số điện thoại đã được sử dụng");
+//            }
+//        }
+//
+//        // Lấy vai trò CUSTOMER
+//        Role customerRole = roleRepository.findByName("CUSTOMER")
+//                .orElseThrow(() -> new RuntimeException("Vai trò CUSTOMER không tồn tại"));
+//
+//        // Tạo đối tượng User từ thông tin đăng ký
+//        User user = User.builder()
+//                .name(registerRequest.getName())
+//                .email(registerRequest.getEmail())
+//                .password(passwordEncoder.encode(registerRequest.getPassword()))
+//                .phoneNumber(registerRequest.getPhoneNumber())
+//                .status(User.UserStatus.ACTIVE)  // Đổi từ isActive(true) sang status(ACTIVE)
+//                .role(customerRole)
+//                .department(null)
+//                .createdAt(LocalDateTime.now())
+//                .build();
+//
+//        // Lưu người dùng vào cơ sở dữ liệu
+//        User savedUser = userRepository.save(user);
+//
+//        // Tạo UserDetails để tạo token
+//        CustomUserDetails userDetails = new CustomUserDetails(savedUser);
+//
+//        // Tạo token JWT (không sử dụng rememberMe cho đăng ký)
+//        String accessToken = jwtService.generateToken(userDetails, false);
+//        String refreshToken = jwtService.generateRefreshToken(userDetails, false);
+//
+//        // Ghi log sự kiện đăng ký thành công
+//        log.info("Đăng ký thành công cho email: {}", registerRequest.getEmail());
+//
+//        // Tạo đối tượng phản hồi
+//        return AuthResponse.builder()
+//                .accessToken(accessToken)
+//                .refreshToken(refreshToken)
+//                .user(userMapper.toDto(savedUser))
+//                .build();
+        return null;
     }
 }

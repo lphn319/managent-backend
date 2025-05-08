@@ -35,7 +35,7 @@ public class Role {
     )
     private Set<Permission> permissions = new HashSet<>();
 
-    @ManyToMany(mappedBy = "roles")
+    @OneToMany(mappedBy = "role")
     private Set<User> users = new HashSet<>();
 
     // Helper method

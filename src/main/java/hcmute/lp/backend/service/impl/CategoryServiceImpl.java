@@ -88,14 +88,6 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.existsByName(name);
     }
 
-    @Override
-    public CategoryDto updateCategoryStatus(int id, String status) {
-        Category category = categoryRepository.findById(id).orElseThrow(() ->
-                new ResourceNotFoundException("Category not found with id: " + id));
-        category.setStatus(Category.CategoryStatus.valueOf(status));
-        Category updatedCategory = categoryRepository.save(category);
-        return categoryMapper.toDto(updatedCategory);
-    }
 
     @Override
     public List<CategoryDto> getCategoriesByParentId(int parentId) {
@@ -110,32 +102,6 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryDto> getCategoriesByParentIdAndStatus(int parentId, String status) {
         return List.of();
-    }
-
-    @Override
-    public Page<CategoryDto> getCategoriesPaginated(int page, int size, String sortBy, String sortDirection, String status) {
-        // Tạo đối tượng Pageable với thông số phân trang
-        Sort.Direction direction = sortDirection.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
-        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortBy));
-
-        Page<Category> categoryPage;
-
-        // Nếu có tham số status, lọc theo status
-        if (status != null && !status.isEmpty()) {
-            try {
-                Category.CategoryStatus categoryStatus = Category.CategoryStatus.valueOf(status);
-                categoryPage = categoryRepository.findByStatus(categoryStatus, pageable);
-            } catch (IllegalArgumentException e) {
-                // Nếu status không hợp lệ, trả về tất cả
-                categoryPage = categoryRepository.findAll(pageable);
-            }
-        } else {
-            // Nếu không có tham số status, trả về tất cả
-            categoryPage = categoryRepository.findAll(pageable);
-        }
-
-        // Chuyển đổi Page<Category> thành Page<CategoryDto>
-        return categoryPage.map(categoryMapper::toDto);
     }
 
 }

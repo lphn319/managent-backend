@@ -58,37 +58,4 @@ public class BrandController {
         return ResponseEntity.ok(ApiResponse.success("Brand deleted successfully", null));
     }
 
-    @PatchMapping("/{id}/status")
-    public ResponseEntity<BrandDto> updateBrandStatus(
-            @PathVariable int id,
-            @RequestBody Map<String, String> statusRequest) {
-        String status = statusRequest.get("status");
-        BrandDto updatedBrand = brandService.updateBrandStatus(id, status);
-        return ResponseEntity.ok(updatedBrand);
-    }
-
-    @GetMapping("/featured")
-    public ResponseEntity<List<BrandDto>> getFeaturedBrands(
-            @RequestParam(defaultValue = "5") int limit) {
-        List<BrandDto> featuredBrands = brandService.getFeaturedBrands(limit);
-        return ResponseEntity.ok(featuredBrands);
-    }
-
-    @GetMapping("/statistics")
-    public ResponseEntity<Map<String, Integer>> getBrandStatistics() {
-        Map<String, Integer> statistics = brandService.getBrandStatistics();
-        return ResponseEntity.ok(statistics);
-    }
-
-    @GetMapping("/pagination")
-    public ResponseEntity<ApiResponse<Page<BrandDto>>> getBrandsPaginated(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "name") String sortBy,
-            @RequestParam(defaultValue = "asc") String sortDirection,
-            @RequestParam(required = false) String status) {
-        Page<BrandDto> brandPage = brandService.getBrandsPaginated(
-                page, size, sortBy, sortDirection, status);
-        return ResponseEntity.ok(ApiResponse.success("Brands retrieved successfully", brandPage));
-    }
 }

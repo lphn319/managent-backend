@@ -8,10 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SupplierRepository extends JpaRepository<Supplier, Integer> {
-    Supplier findByCompanyName(String companyName);
     boolean existsByCompanyName(String companyName);
-    boolean existsById(Integer id);
-
-    // Thêm phương thức tìm kiếm có phân trang
-    Page<Supplier> findByCompanyNameContaining(String companyName, Pageable pageable);
 }
