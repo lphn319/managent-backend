@@ -24,7 +24,7 @@ public class Customer {
     @JoinColumn(name = "id")
     private User user;
 
-    @Column(name = "full_name", nullable = false)
+    @Column(name = "full_name")
     private String fullName;
 
     @Column(name = "phone_number")
@@ -41,9 +41,6 @@ public class Customer {
 
     @Column(name = "membership_level")
     private String membershipLevel;
-
-    @Column(name = "registration_date")
-    private LocalDate registrationDate;
 
     @Column(name = "loyalty_points")
     private Integer loyaltyPoints = 0;

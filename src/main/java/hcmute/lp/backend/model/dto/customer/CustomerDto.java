@@ -19,7 +19,6 @@ public class CustomerDto {
     private String gender;
     private String address;
     private String membershipLevel;
-    private LocalDate registrationDate;
     private Integer loyaltyPoints;
     private String email; // Thêm từ User
     private String status; // Thêm từ User

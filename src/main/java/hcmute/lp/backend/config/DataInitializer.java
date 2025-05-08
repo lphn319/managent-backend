@@ -221,7 +221,6 @@ public class DataInitializer implements CommandLineRunner {
                 customer.setPhoneNumber(request.getPhoneNumber());
                 customer.setDateOfBirth(request.getDateOfBirth());
                 customer.setGender(request.getGender());
-                customer.setRegistrationDate(LocalDate.now());
                 customer.setMembershipLevel(CommonCategories.MembershipLevel.BRONZE);
                 customer.setLoyaltyPoints(0);
                 entityManager.persist(customer);
