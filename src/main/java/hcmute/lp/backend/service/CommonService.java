@@ -1,6 +1,6 @@
 package hcmute.lp.backend.service;
 
-import hcmute.lp.backend.model.common.Common;
+import hcmute.lp.backend.model.entity.Common;
 import hcmute.lp.backend.repository.CommonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;

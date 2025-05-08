@@ -64,7 +64,7 @@ public class RoleServiceImpl implements RoleService {
         }
 
         // Cập nhật role
-        roleMapper.updateEntityFromRequest(roleRequest, role);
+        roleMapper.updateEntityFromRequest(role, roleRequest);
         Role updatedRole = roleRepository.save(role);
 
         return roleMapper.toDto(updatedRole);

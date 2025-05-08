@@ -14,13 +14,7 @@ public interface ImportDetailMapper {
 
     ImportDetailMapper INSTANCE = org.mapstruct.factory.Mappers.getMapper(ImportDetailMapper.class);
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "importOrder", ignore = true)
-    @Mapping(target = "product", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(target = "createdBy", ignore = true)
-    @Mapping(target = "lastModifiedBy", ignore = true)
+
     ImportDetail toEntity(ImportDetailRequest importDetailRequest);
 
     @Mapping(target = "product", source = "product")

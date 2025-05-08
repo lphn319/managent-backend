@@ -4,7 +4,6 @@ import hcmute.lp.backend.exception.ResourceNotFoundException;
 import hcmute.lp.backend.model.dto.import_.ImportDto;
 import hcmute.lp.backend.model.dto.import_.ImportRequest;
 import hcmute.lp.backend.model.entity.Import;
-import hcmute.lp.backend.model.entity.Import.ImportStatus;
 import hcmute.lp.backend.model.entity.ImportDetail;
 import hcmute.lp.backend.model.entity.Product;
 import hcmute.lp.backend.model.entity.Supplier;

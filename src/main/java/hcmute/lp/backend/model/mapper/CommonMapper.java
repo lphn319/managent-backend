@@ -1,6 +1,6 @@
 package hcmute.lp.backend.model.mapper;
 
-import hcmute.lp.backend.model.common.Common;
+import hcmute.lp.backend.model.entity.Common;
 import hcmute.lp.backend.model.dto.common.CommonDto;
 import hcmute.lp.backend.model.dto.common.CommonRequest;
 import org.mapstruct.*;

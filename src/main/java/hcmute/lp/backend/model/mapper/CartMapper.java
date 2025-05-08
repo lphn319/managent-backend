@@ -15,16 +15,10 @@ public interface CartMapper {
 
     CartMapper INSTANCE = org.mapstruct.factory.Mappers.getMapper(CartMapper.class);
 
-    @Mapping(target = "customer", source = "customer")
     CartDto toDto(Cart cart);
 
-    @Mapping(target = "product", source = "product")
     CartItemDto toItemDto(CartItem cartItem);
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "cart", ignore = true)
-    @Mapping(target = "product", ignore = true)
-    @Mapping(target = "subtotal", ignore = true)
     CartItem toItemEntity(CartItemRequest cartItemRequest);
 
     List<CartItemDto> toItemDtoList(List<CartItem> cartItems);

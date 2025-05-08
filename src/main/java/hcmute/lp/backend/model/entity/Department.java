@@ -24,5 +24,5 @@ public class Department {
     private String description;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<User> employees;
+    private List<Employee> employees;
 }

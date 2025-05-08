@@ -21,7 +21,7 @@ public class Employee {
 
     @OneToOne
     @MapsId // Sử dụng cùng ID với User
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "id")
     private User user;
 
     @Column(name = "employee_id", unique = true)

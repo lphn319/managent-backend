@@ -19,5 +19,10 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByEmail(String email);
+    @Query("SELECT COUNT(u) > 0 FROM User u WHERE u.id IN " +
+            "(SELECT c.id FROM Customer c WHERE c.phoneNumber = :phone) OR " +
+            "u.id IN (SELECT e.id FROM Employee e WHERE e.phoneNumber = :phone)")
     boolean existsByPhoneNumber(String phone);
+
+    Optional<User> findByEmail(String email);
 }
