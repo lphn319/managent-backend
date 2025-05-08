@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Administration",
+    "description": "Administrative department"
+  },
+  {
+    "name": "Sales",
+    "description": "Sales department"
+  },
+  {
+    "name": "Warehouse",
+    "description": "Warehouse management department"
+  },
+  {
+    "name": "Customer Service",
+    "description": "Customer service department"
+  },
+  {
+    "name": "IT",
+    "description": "Information Technology department"
+  },
+  {
+    "name": "Marketing",
+    "description": "Marketing department"
+  },
+  {
+    "name": "Finance",
+    "description": "Finance and accounting department"
+  },
+  {
+    "name": "Human Resources",
+    "description": "Human Resources department"
+  }
+]

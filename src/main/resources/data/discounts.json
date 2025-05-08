@@ -1,0 +1,92 @@
+[
+  {
+    "code": "WELCOME10",
+    "name": "Welcome Discount",
+    "description": "10% off for new customers",
+    "discountRate": 0.1,
+    "startDate": "2025-01-01",
+    "endDate": "2025-12-31",
+    "active": true
+  },
+  {
+    "code": "SUMMER25",
+    "name": "Summer Sale",
+    "description": "25% off for summer season",
+    "discountRate": 0.25,
+    "startDate": "2025-06-01",
+    "endDate": "2025-08-31",
+    "active": true
+  },
+  {
+    "code": "HOLIDAY15",
+    "name": "Holiday Discount",
+    "description": "15% off for holiday season",
+    "discountRate": 0.15,
+    "startDate": "2025-11-15",
+    "endDate": "2025-12-31",
+    "active": true
+  },
+  {
+    "code": "FLASH30",
+    "name": "Flash Sale",
+    "description": "30% off for 48 hours only",
+    "discountRate": 0.3,
+    "startDate": "2025-04-15",
+    "endDate": "2025-04-17",
+    "active": true
+  },
+  {
+    "code": "LOYALTY20",
+    "name": "Loyalty Discount",
+    "description": "20% off for loyal customers",
+    "discountRate": 0.2,
+    "startDate": "2025-01-01",
+    "endDate": "2025-12-31",
+    "active": true
+  },
+  {
+    "code": "STUDENT10",
+    "name": "Student Discount",
+    "description": "10% off for students",
+    "discountRate": 0.1,
+    "startDate": "2025-01-01",
+    "endDate": "2025-12-31",
+    "active": true
+  },
+  {
+    "code": "BIRTHDAY15",
+    "name": "Birthday Discount",
+    "description": "15% off during customer's birthday month",
+    "discountRate": 0.15,
+    "startDate": "2025-01-01",
+    "endDate": "2025-12-31",
+    "active": true
+  },
+  {
+    "code": "CLEARANCE50",
+    "name": "Clearance Sale",
+    "description": "50% off for clearance items",
+    "discountRate": 0.5,
+    "startDate": "2025-02-01",
+    "endDate": "2025-02-28",
+    "active": true
+  },
+  {
+    "code": "APP15",
+    "name": "Mobile App Discount",
+    "description": "15% off for orders placed through mobile app",
+    "discountRate": 0.15,
+    "startDate": "2025-01-01",
+    "endDate": "2025-12-31",
+    "active": true
+  },
+  {
+    "code": "BUNDLE20",
+    "name": "Bundle Discount",
+    "description": "20% off when purchasing bundle products",
+    "discountRate": 0.2,
+    "startDate": "2025-01-01",
+    "endDate": "2025-12-31",
+    "active": true
+  }
+]

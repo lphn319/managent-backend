@@ -27,5 +27,12 @@ public class CommonCategories {
         public static final String ACTIVE = "ACTIVE";
         public static final String INACTIVE = "INACTIVE";
     }
+
+    public static class MembershipLevel {
+        public static final String BRONZE = "BRONZE";
+        public static final String SILVER = "SILVER";
+        public static final String GOLD = "GOLD";
+        public static final String PLATINUM = "PLATINUM";
+    }
 }
 

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "ADMIN",
+    "description": "Administrator with full access",
+    "permissionIds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+  },
+  {
+    "name": "MANAGER",
+    "description": "Store manager with limited administrative access",
+    "permissionIds": [1, 2, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15, 16, 17, 19, 20]
+  },
+  {
+    "name": "EMPLOYEE",
+    "description": "Regular store employee",
+    "permissionIds": [1, 5, 6, 7, 19, 20]
+  },
+  {
+    "name": "CUSTOMER",
+    "description": "Store customer",
+    "permissionIds": [1, 18, 19, 20]
+  }
+]

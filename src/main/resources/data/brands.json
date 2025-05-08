@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Apple",
+    "description": "American technology company",
+    "logoUrl": "assets/brands/apple.png",
+    "origin": "USA",
+    "website": "https://www.apple.com"
+  },
+  {
+    "name": "Samsung",
+    "description": "South Korean electronics company",
+    "logoUrl": "assets/brands/samsung.png",
+    "origin": "South Korea",
+    "website": "https://www.samsung.com"
+  },
+  {
+    "name": "Dell",
+    "description": "American computer technology company",
+    "logoUrl": "assets/brands/dell.png",
+    "origin": "USA",
+    "website": "https://www.dell.com"
+  },
+  {
+    "name": "HP",
+    "description": "American information technology company",
+    "logoUrl": "assets/brands/hp.png",
+    "origin": "USA",
+    "website": "https://www.hp.com"
+  },
+  {
+    "name": "Lenovo",
+    "description": "Chinese multinational technology company",
+    "logoUrl": "assets/brands/lenovo.png",
+    "origin": "China",
+    "website": "https://www.lenovo.com"
+  },
+  {
+    "name": "Adidas",
+    "description": "German sportswear manufacturer",
+    "logoUrl": "assets/brands/adidas.png",
+    "origin": "Germany",
+    "website": "https://www.adidas.com"
+  },
+  {
+    "name": "Nike",
+    "description": "American sportswear company",
+    "logoUrl": "assets/brands/nike.png",
+    "origin": "USA",
+    "website": "https://www.nike.com"
+  },
+  {
+    "name": "Ikea",
+    "description": "Swedish furniture retailer",
+    "logoUrl": "assets/brands/ikea.png",
+    "origin": "Sweden",
+    "website": "https://www.ikea.com"
+  },
+  {
+    "name": "Penguin Books",
+    "description": "British publishing company",
+    "logoUrl": "assets/brands/penguin.png",
+    "origin": "UK",
+    "website": "https://www.penguin.com"
+  },
+  {
+    "name": "Hasbro",
+    "description": "American toy and board game company",
+    "logoUrl": "assets/brands/hasbro.png",
+    "origin": "USA",
+    "website": "https://www.hasbro.com"
+  }
+]

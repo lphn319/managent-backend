@@ -1,0 +1,108 @@
+[
+  {
+    "name": "Admin User",
+    "email": "admin@example.com",
+    "phoneNumber": "0987654321",
+    "password": "admin123",
+    "dateOfBirth": "1990-01-01",
+    "gender": "MALE",
+    "departmentId": 1,
+    "roleId": 1,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Store Manager",
+    "email": "manager@example.com",
+    "phoneNumber": "0987654322",
+    "password": "manager123",
+    "dateOfBirth": "1985-05-15",
+    "gender": "FEMALE",
+    "departmentId": 1,
+    "roleId": 2,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Sales Employee",
+    "email": "sales@example.com",
+    "phoneNumber": "0987654323",
+    "password": "sales123",
+    "dateOfBirth": "1995-10-20",
+    "gender": "MALE",
+    "departmentId": 2,
+    "roleId": 3,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Warehouse Staff",
+    "email": "warehouse@example.com",
+    "phoneNumber": "0987654324",
+    "password": "warehouse123",
+    "dateOfBirth": "1992-07-12",
+    "gender": "MALE",
+    "departmentId": 3,
+    "roleId": 3,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Customer Service Rep",
+    "email": "service@example.com",
+    "phoneNumber": "0987654325",
+    "password": "service123",
+    "dateOfBirth": "1993-03-25",
+    "gender": "FEMALE",
+    "departmentId": 4,
+    "roleId": 3,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "IT Support",
+    "email": "it@example.com",
+    "phoneNumber": "0987654326",
+    "password": "it123",
+    "dateOfBirth": "1988-12-05",
+    "gender": "MALE",
+    "departmentId": 5,
+    "roleId": 3,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "phoneNumber": "0987654327",
+    "password": "customer123",
+    "dateOfBirth": "1990-06-15",
+    "gender": "MALE",
+    "roleId": 4,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "phoneNumber": "0987654328",
+    "password": "customer123",
+    "dateOfBirth": "1992-09-22",
+    "gender": "FEMALE",
+    "roleId": 4,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "David Johnson",
+    "email": "david.johnson@example.com",
+    "phoneNumber": "0987654329",
+    "password": "customer123",
+    "dateOfBirth": "1985-11-30",
+    "gender": "MALE",
+    "roleId": 4,
+    "status": "ACTIVE"
+  },
+  {
+    "name": "Mary Brown",
+    "email": "mary.brown@example.com",
+    "phoneNumber": "0987654330",
+    "password": "customer123",
+    "dateOfBirth": "1988-07-17",
+    "gender": "FEMALE",
+    "roleId": 4,
+    "status": "ACTIVE"
+  }
+]

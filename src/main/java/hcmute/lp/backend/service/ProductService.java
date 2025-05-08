@@ -11,10 +11,10 @@ public interface ProductService {
 
     Page<ProductDto> getProductsPaginated(int page, int size, String sortBy, String sortDirection);
 
-    ProductDto getProductById(int id);
+    ProductDto getProductById(long id);
+
     ProductDto createProduct(ProductRequest productRequest);
-    ProductDto updateProduct(int id, ProductRequest productRequest);
-    void deleteProduct(int id);
-    boolean existsById(int id);
-    boolean existsByName(String name);
+    ProductDto updateProduct(long id, ProductRequest productRequest);
+    void deleteProduct(long id);
+
 }

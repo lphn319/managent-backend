@@ -1,0 +1,97 @@
+[
+  {
+    "name": "Electronics",
+    "description": "Electronic devices and gadgets"
+  },
+  {
+    "name": "Smartphones",
+    "description": "Mobile phones and smartphones",
+    "parentId": 1
+  },
+  {
+    "name": "Laptops",
+    "description": "Notebook computers and accessories",
+    "parentId": 1
+  },
+  {
+    "name": "Tablets",
+    "description": "Tablet computers",
+    "parentId": 1
+  },
+  {
+    "name": "Accessories",
+    "description": "Electronic accessories",
+    "parentId": 1
+  },
+  {
+    "name": "Clothing",
+    "description": "Clothing and apparel"
+  },
+  {
+    "name": "Men's Clothing",
+    "description": "Clothing for men",
+    "parentId": 6
+  },
+  {
+    "name": "Women's Clothing",
+    "description": "Clothing for women",
+    "parentId": 6
+  },
+  {
+    "name": "Kid's Clothing",
+    "description": "Clothing for children",
+    "parentId": 6
+  },
+  {
+    "name": "Home & Kitchen",
+    "description": "Home and kitchen products"
+  },
+  {
+    "name": "Furniture",
+    "description": "Furniture for home and office",
+    "parentId": 10
+  },
+  {
+    "name": "Kitchenware",
+    "description": "Kitchen tools and appliances",
+    "parentId": 10
+  },
+  {
+    "name": "Home Decor",
+    "description": "Decorative items for home",
+    "parentId": 10
+  },
+  {
+    "name": "Books",
+    "description": "Books and educational materials"
+  },
+  {
+    "name": "Fiction",
+    "description": "Fiction books",
+    "parentId": 14
+  },
+  {
+    "name": "Non-Fiction",
+    "description": "Non-fiction books",
+    "parentId": 14
+  },
+  {
+    "name": "Textbooks",
+    "description": "Academic and educational textbooks",
+    "parentId": 14
+  },
+  {
+    "name": "Toys & Games",
+    "description": "Toys and games for all ages"
+  },
+  {
+    "name": "Board Games",
+    "description": "Traditional and modern board games",
+    "parentId": 18
+  },
+  {
+    "name": "Action Figures",
+    "description": "Collectible action figures",
+    "parentId": 18
+  }
+]

@@ -1,0 +1,156 @@
+[
+  {
+    "supplierId": 1,
+    "status": "COMPLETED",
+    "notes": "Regular monthly restock of electronic devices",
+    "importDetails": [
+      {
+        "productId": 1,
+        "quantity": 20,
+        "price": 900.00
+      },
+      {
+        "productId": 2,
+        "quantity": 15,
+        "price": 950.00
+      },
+      {
+        "productId": 3,
+        "quantity": 10,
+        "price": 2000.00
+      }
+    ]
+  },
+  {
+    "supplierId": 2,
+    "status": "COMPLETED",
+    "notes": "Seasonal clothing inventory update",
+    "importDetails": [
+      {
+        "productId": 9,
+        "quantity": 30,
+        "price": 150.00
+      },
+      {
+        "productId": 10,
+        "quantity": 25,
+        "price": 120.00
+      },
+      {
+        "productId": 11,
+        "quantity": 40,
+        "price": 50.00
+      }
+    ]
+  },
+  {
+    "supplierId": 3,
+    "status": "PROCESSING",
+    "notes": "New furniture collection arrival",
+    "importDetails": [
+      {
+        "productId": 14,
+        "quantity": 15,
+        "price": 55.00
+      },
+      {
+        "productId": 15,
+        "quantity": 10,
+        "price": 160.00
+      }
+    ]
+  },
+  {
+    "supplierId": 4,
+    "status": "COMPLETED",
+    "notes": "New book releases for summer reading",
+    "importDetails": [
+      {
+        "productId": 18,
+        "quantity": 50,
+        "price": 8.00
+      },
+      {
+        "productId": 19,
+        "quantity": 40,
+        "price": 7.00
+      },
+      {
+        "productId": 20,
+        "quantity": 25,
+        "price": 12.00
+      },
+      {
+        "productId": 21,
+        "quantity": 20,
+        "price": 75.00
+      }
+    ]
+  },
+  {
+    "supplierId": 5,
+    "status": "PROCESSING",
+    "notes": "Holiday season toys and games",
+    "importDetails": [
+      {
+        "productId": 23,
+        "quantity": 30,
+        "price": 15.00
+      },
+      {
+        "productId": 23,
+        "quantity": 25,
+        "price": 22.00
+      }
+    ]
+  },
+  {
+    "supplierId": 6,
+    "status": "COMPLETED",
+    "notes": "Apple product line refresh",
+    "importDetails": [
+      {
+        "productId": 1,
+        "quantity": 10,
+        "price": 900.00
+      },
+      {
+        "productId": 3,
+        "quantity": 5,
+        "price": 2000.00
+      },
+      {
+        "productId": 5,
+        "quantity": 15,
+        "price": 900.00
+      },
+      {
+        "productId": 7,
+        "quantity": 20,
+        "price": 200.00
+      }
+    ]
+  },
+  {
+    "supplierId": 7,
+    "status": "COMPLETED",
+    "notes": "Samsung new models",
+    "importDetails": [
+      {
+        "productId": 2,
+        "quantity": 15,
+        "price": 950.00
+      },
+      {
+        "productId": 6,
+        "quantity": 10,
+        "price": 750.00
+      },
+      {
+        "productId": 8,
+        "quantity": 25,
+        "price": 150.00
+      }
+    ]
+  }
+]

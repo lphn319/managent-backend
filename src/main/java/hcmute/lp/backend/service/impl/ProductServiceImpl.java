@@ -52,7 +52,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto getProductById(int id) {
+    public ProductDto getProductById(long id) {
         Product product = productRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Product not found with id: " + id));
         return productMapper.toDto(product);
@@ -89,7 +89,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public ProductDto updateProduct(int id, ProductRequest productRequest) {
+    public ProductDto updateProduct(long id, ProductRequest productRequest) {
         Product product = productRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Product not found with id: " + id));
 
@@ -114,20 +114,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProduct(int id) {
+    public void deleteProduct(long id) {
         if (!productRepository.existsById(id)) {
             throw new ResourceNotFoundException("Product not found with id: " + id);
         }
         productRepository.deleteById(id);
     }
 
-    @Override
-    public boolean existsById(int id) {
-        return productRepository.existsById(id);
-    }
 
-    @Override
-    public boolean existsByName(String name) {
-        return productRepository.existsByName(name);
-    }
 }

@@ -1,0 +1,74 @@
+[
+  {
+    "category": "USER_STATUS",
+    "value": "ACTIVE"
+  },
+  {
+    "category": "USER_STATUS",
+    "value": "INACTIVE"
+  },
+  {
+    "category": "GENDER",
+    "value": "MALE"
+  },
+  {
+    "category": "GENDER",
+    "value": "FEMALE"
+  },
+  {
+    "category": "GENDER",
+    "value": "OTHER"
+  },
+  {
+    "category": "MEMBERSHIP_LEVEL",
+    "value": "BRONZE"
+  },
+  {
+    "category": "MEMBERSHIP_LEVEL",
+    "value": "SILVER"
+  },
+  {
+    "category": "MEMBERSHIP_LEVEL",
+    "value": "GOLD"
+  },
+  {
+    "category": "MEMBERSHIP_LEVEL",
+    "value": "PLATINUM"
+  },
+  {
+    "category": "ORDER_STATUS",
+    "value": "PENDING"
+  },
+  {
+    "category": "ORDER_STATUS",
+    "value": "PROCESSING"
+  },
+  {
+    "category": "ORDER_STATUS",
+    "value": "COMPLETED"
+  },
+  {
+    "category": "ORDER_STATUS",
+    "value": "CANCELLED"
+  },
+  {
+    "category": "ORDER_STATUS",
+    "value": "DELIVERED"
+  },
+  {
+    "category": "ORDER_STATUS",
+    "value": "RETURNED"
+  },
+  {
+    "category": "IMPORT_STATUS",
+    "value": "PROCESSING"
+  },
+  {
+    "category": "IMPORT_STATUS",
+    "value": "COMPLETED"
+  },
+  {
+    "category": "IMPORT_STATUS",
+    "value": "CANCELLED"
+  }
+]

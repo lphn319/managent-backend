@@ -1,0 +1,97 @@
+[
+  {
+    "customerId": 7,
+    "status": "COMPLETED",
+    "discountId": 1,
+    "orderDetails": [
+      {
+        "productId": 1,
+        "quantity": 1,
+        "discountAmount": 0
+      },
+      {
+        "productId": 7,
+        "quantity": 1,
+        "discountAmount": 0
+      }
+    ]
+  },
+  {
+    "customerId": 8,
+    "status": "DELIVERED",
+    "discountId": 3,
+    "orderDetails": [
+      {
+        "productId": 2,
+        "quantity": 1,
+        "discountAmount": 0
+      },
+      {
+        "productId": 12,
+        "quantity": 2,
+        "discountAmount": 10
+      }
+    ]
+  },
+  {
+    "customerId": 9,
+    "status": "PROCESSING",
+    "orderDetails": [
+      {
+        "productId": 3,
+        "quantity": 1,
+        "discountAmount": 0
+      },
+      {
+        "productId": 14,
+        "quantity": 1,
+        "discountAmount": 0
+      }
+    ]
+  },
+  {
+    "customerId": 10,
+    "status": "PENDING",
+    "discountId": 2,
+    "orderDetails": [
+      {
+        "productId": 5,
+        "quantity": 1,
+        "discountAmount": 0
+      }
+    ]
+  },
+  {
+    "customerId": 7,
+    "status": "CANCELLED",
+    "orderDetails": [
+      {
+        "productId": 8,
+        "quantity": 1,
+        "discountAmount": 0
+      },
+      {
+        "productId": 10,
+        "quantity": 1,
+        "discountAmount": 0
+      }
+    ]
+  },
+  {
+    "customerId": 8,
+    "status": "COMPLETED",
+    "discountId": 5,
+    "orderDetails": [
+      {
+        "productId": 15,
+        "quantity": 1,
+        "discountAmount": 0
+      },
+      {
+        "productId": 19,
+        "quantity": 1,
+        "discountAmount": 0
+      }
+    ]
+  }
+]

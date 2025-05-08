@@ -1,0 +1,102 @@
+[
+  {
+    "companyName": "Tech Wholesalers Inc.",
+    "address": "123 Tech Blvd, San Jose, CA 95123",
+    "phone": "0901234567",
+    "email": "info@techwholesalers.com",
+    "description": "Wholesale supplier of electronic devices and components",
+    "logo": "assets/suppliers/tech-wholesalers.png",
+    "status": "ACTIVE",
+    "categoryIds": [1, 2, 3, 4, 5]
+  },
+  {
+    "companyName": "Global Apparel Distributors",
+    "address": "456 Fashion Ave, New York, NY 10018",
+    "phone": "0912345678",
+    "email": "contact@globalapparel.com",
+    "description": "International distributor of clothing and apparel",
+    "logo": "assets/suppliers/global-apparel.png",
+    "status": "ACTIVE",
+    "categoryIds": [6, 7, 8, 9]
+  },
+  {
+    "companyName": "Home Furnishings Supply Co.",
+    "address": "789 Decor St, Chicago, IL 60611",
+    "phone": "0923456789",
+    "email": "sales@homefurnishingssupply.com",
+    "description": "Supplier of furniture and home decor items",
+    "logo": "assets/suppliers/home-furnishings.png",
+    "status": "ACTIVE",
+    "categoryIds": [10, 11, 12, 13]
+  },
+  {
+    "companyName": "Literary Publishers Group",
+    "address": "321 Book Lane, Boston, MA 02108",
+    "phone": "0934567890",
+    "email": "orders@literarypublishers.com",
+    "description": "Distributor of books and educational materials",
+    "logo": "assets/suppliers/literary-publishers.png",
+    "status": "ACTIVE",
+    "categoryIds": [14, 15, 16, 17]
+  },
+  {
+    "companyName": "Play Time Distributors",
+    "address": "654 Game St, Orlando, FL 32801",
+    "phone": "0945678901",
+    "email": "info@playtimedistr.com",
+    "description": "Wholesale supplier of toys and games",
+    "logo": "assets/suppliers/play-time.png",
+    "status": "ACTIVE",
+    "categoryIds": [18, 19, 20]
+  },
+  {
+    "companyName": "Apple Authorized Distributor",
+    "address": "987 Innovation Dr, Cupertino, CA 95014",
+    "phone": "0956789012",
+    "email": "orders@appleauth.com",
+    "description": "Authorized distributor of Apple products",
+    "logo": "assets/suppliers/apple-distributor.png",
+    "status": "ACTIVE",
+    "categoryIds": [1, 2, 3, 4, 5]
+  },
+  {
+    "companyName": "Samsung Electronic Solutions",
+    "address": "543 Tech Park, Seoul, South Korea",
+    "phone": "0967890123",
+    "email": "wholesale@samsungsolutions.com",
+    "description": "Official distributor of Samsung electronics",
+    "logo": "assets/suppliers/samsung-solutions.png",
+    "status": "ACTIVE",
+    "categoryIds": [1, 2, 4, 5]
+  },
+  {
+    "companyName": "Sport Gear Wholesalers",
+    "address": "210 Athletic Dr, Portland, OR 97201",
+    "phone": "0978901234",
+    "email": "sales@sportgearwholesale.com",
+    "description": "Supplier of sports apparel and equipment",
+    "logo": "assets/suppliers/sport-gear.png",
+    "status": "ACTIVE",
+    "categoryIds": [6, 7, 8, 9]
+  },
+  {
+    "companyName": "Global Book Distributors",
+    "address": "432 Literature St, London, UK",
+    "phone": "0989012345",
+    "email": "orders@globalbookdist.com",
+    "description": "International distributor of books and publications",
+    "logo": "assets/suppliers/global-book.png",
+    "status": "ACTIVE",
+    "categoryIds": [14, 15, 16, 17]
+  },
+  {
+    "companyName": "Kids Fun Supplies",
+    "address": "765 Toy Ave, Toronto, Canada",
+    "phone": "0990123456",
+    "email": "info@kidsfunsupplies.com",
+    "description": "Wholesale supplier of children's toys and games",
+    "logo": "assets/suppliers/kids-fun.png",
+    "status": "ACTIVE",
+    "categoryIds": [18, 19, 20]
+  }
+]

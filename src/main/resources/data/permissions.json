@@ -1,0 +1,82 @@
+[
+  {
+    "code": "VIEW_PRODUCTS",
+    "description": "Permission to view products"
+  },
+  {
+    "code": "EDIT_PRODUCTS",
+    "description": "Permission to edit products"
+  },
+  {
+    "code": "DELETE_PRODUCTS",
+    "description": "Permission to delete products"
+  },
+  {
+    "code": "ADD_PRODUCTS",
+    "description": "Permission to add products"
+  },
+  {
+    "code": "VIEW_ORDERS",
+    "description": "Permission to view orders"
+  },
+  {
+    "code": "MANAGE_ORDERS",
+    "description": "Permission to manage orders"
+  },
+  {
+    "code": "VIEW_CUSTOMERS",
+    "description": "Permission to view customers"
+  },
+  {
+    "code": "EDIT_CUSTOMERS",
+    "description": "Permission to edit customers"
+  },
+  {
+    "code": "VIEW_EMPLOYEES",
+    "description": "Permission to view employees"
+  },
+  {
+    "code": "MANAGE_EMPLOYEES",
+    "description": "Permission to manage employees"
+  },
+  {
+    "code": "VIEW_REPORTS",
+    "description": "Permission to view reports"
+  },
+  {
+    "code": "MANAGE_SETTINGS",
+    "description": "Permission to manage system settings"
+  },
+  {
+    "code": "MANAGE_CATEGORIES",
+    "description": "Permission to manage categories"
+  },
+  {
+    "code": "MANAGE_BRANDS",
+    "description": "Permission to manage brands"
+  },
+  {
+    "code": "MANAGE_SUPPLIERS",
+    "description": "Permission to manage suppliers"
+  },
+  {
+    "code": "MANAGE_IMPORTS",
+    "description": "Permission to manage product imports"
+  },
+  {
+    "code": "MANAGE_DISCOUNTS",
+    "description": "Permission to manage discounts"
+  },
+  {
+    "code": "PLACE_ORDERS",
+    "description": "Permission to place orders"
+  },
+  {
+    "code": "VIEW_PROFILE",
+    "description": "Permission to view own profile"
+  },
+  {
+    "code": "EDIT_PROFILE",
+    "description": "Permission to edit own profile"
+  }
+]
