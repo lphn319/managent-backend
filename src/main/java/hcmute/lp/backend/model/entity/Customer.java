@@ -1,9 +1,9 @@
 package hcmute.lp.backend.model.entity;
 
+import hcmute.lp.backend.model.common.CommonCategories;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -34,8 +34,7 @@ public class Customer {
     private LocalDate dateOfBirth;
 
     @Column(name = "gender")
-    @Enumerated(EnumType.STRING)
-    private GenderType gender;
+    private String gender;
 
     @Column(name = "address")
     private String address;
@@ -49,7 +48,16 @@ public class Customer {
     @Column(name = "loyalty_points")
     private Integer loyaltyPoints = 0;
 
-    public enum GenderType {
-        MALE, FEMALE, OTHER
+    //Helper method to check the value of gender
+    public boolean isMale() {
+        return CommonCategories.GenderType.MALE.equals(this.gender);
+    }
+
+    public boolean isFemale() {
+        return CommonCategories.GenderType.FEMALE.equals(this.gender);
+    }
+
+    public boolean isOther() {
+        return CommonCategories.GenderType.OTHER.equals(this.gender);
     }
 }

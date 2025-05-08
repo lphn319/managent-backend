@@ -15,5 +15,4 @@ public class BrandRequest {
     private String logoUrl;
     private String origin;
     private String website;
-    private String status;
 }

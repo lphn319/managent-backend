@@ -1,7 +1,6 @@
 package hcmute.lp.backend.model.dto.supplier;
 
 import hcmute.lp.backend.model.dto.category.CategoryDto;
-import hcmute.lp.backend.model.entity.Supplier.SupplierStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +20,6 @@ public class SupplierDto {
     private String email;
     private String description;
     private String logo;
-    private SupplierStatus status;
+    private String status; // Sửa lại từ Enum sang String
     private Set<CategoryDto> categories;
 }

@@ -1,5 +1,4 @@
-package hcmute.lp.backend.model.dto.brand;
-
+package hcmute.lp.backend.model.dto.permission;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,12 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BrandDto {
+public class PermissionDto {
     private int id;
-    private String name;
+    private String code;
     private String description;
-    private String logoUrl;
-    private String origin;
-    private String website;
-    private int productCount;
 }

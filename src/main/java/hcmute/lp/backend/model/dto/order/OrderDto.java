@@ -1,7 +1,7 @@
-package hcmute.lp.backend.model.dto.import_;
+package hcmute.lp.backend.model.dto.order;
 
-import hcmute.lp.backend.model.dto.supplier.SupplierDto;
-import hcmute.lp.backend.model.dto.user.UserDto;
+import hcmute.lp.backend.model.dto.customer.CustomerDto;
+import hcmute.lp.backend.model.dto.discount.DiscountDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,19 +9,19 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ImportDto {
-    private Long id;
+public class OrderDto {
+    private UUID id;
+    private CustomerDto customer;
     private String status;
     private double totalAmount;
-    private int quantity;
-    private String notes;
-    private SupplierDto supplier;
+    private DiscountDto discount;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private List<ImportDetailDto> importDetails;
+    private List<OrderDetailDto> orderDetails;
 }

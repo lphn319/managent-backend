@@ -77,14 +77,14 @@ public class DataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         try {
             // Khởi tạo theo thứ tự phụ thuộc
-            initializeBrands();
-            initializeCategories();
-            initializeDepartments();
-            initializeRoles();
-            initializeUsers();
-            initializeProducts();
-            initializeSuppliers();
-            initializeImports();
+//            initializeBrands();
+//            initializeCategories();
+//            initializeDepartments();
+//            initializeRoles();
+//            initializeUsers();
+//            initializeProducts();
+//            initializeSuppliers();
+//            initializeImports();
 
             // Log thông tin sau khi khởi tạo
             logEntityCounts();

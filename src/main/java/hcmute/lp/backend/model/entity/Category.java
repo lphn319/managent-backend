@@ -1,6 +1,7 @@
 package hcmute.lp.backend.model.entity;
 
 import hcmute.lp.backend.model.common.BaseEntity;
+import hcmute.lp.backend.model.common.CommonCategories;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,10 +29,6 @@ public class Category extends BaseEntity {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "status", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private CategoryStatus status = CategoryStatus.ACTIVE;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private Category parent;
@@ -42,7 +39,7 @@ public class Category extends BaseEntity {
     @ManyToMany(mappedBy = "categories", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Product> products;
 
-    // Transient field for product count (not stored in database)
+    // Transient field for product count (not stored in a database)
     @Transient
     private Integer productCount;
 
@@ -54,7 +51,8 @@ public class Category extends BaseEntity {
         return this.products != null ? this.products.size() : 0;
     }
 
-    public enum CategoryStatus {
-        ACTIVE, INACTIVE
+    // Helper method to check if the category is a parent category
+    public boolean isParentCategory() {
+        return this.parent == null;
     }
 }

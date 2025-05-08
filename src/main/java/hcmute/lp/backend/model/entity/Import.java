@@ -1,6 +1,7 @@
 package hcmute.lp.backend.model.entity;
 
 import hcmute.lp.backend.model.common.BaseEntity;
+import hcmute.lp.backend.model.common.CommonCategories;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,9 +21,8 @@ public class Import extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Thay đổi từ int sang Long
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private ImportStatus status;
+    private String status;
 
     @Column(name = "total_amount", nullable = false)
     private double totalAmount;
@@ -37,35 +37,19 @@ public class Import extends BaseEntity {
     @JoinColumn(name = "supplier_id", nullable = false)
     private Supplier supplier;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User employee;
-
     @OneToMany(mappedBy = "importOrder", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ImportDetail> importDetails;
 
-    public enum ImportStatus {
-        PROCESSING("processing"),
-        COMPLETED("completed"),
-        CANCELLED("cancelled");
+    //Helper method to check the value of status
+    public boolean isProcessing() {
+        return CommonCategories.ImportStatus.PROCESSING.equals(this.status);
+    }
 
-        private final String value;
+    public boolean isCompleted() {
+        return CommonCategories.ImportStatus.COMPLETED.equals(this.status);
+    }
 
-        ImportStatus(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        public static ImportStatus fromValue(String value) {
-            for (ImportStatus status : ImportStatus.values()) {
-                if (status.getValue().equals(value)) {
-                    return status;
-                }
-            }
-            throw new IllegalArgumentException("Invalid ImportStatus value: " + value);
-        }
+    public boolean isCancelled() {
+        return CommonCategories.ImportStatus.CANCELLED.equals(this.status);
     }
 }

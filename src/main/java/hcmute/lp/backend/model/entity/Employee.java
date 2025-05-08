@@ -1,9 +1,9 @@
 package hcmute.lp.backend.model.entity;
 
+import hcmute.lp.backend.model.common.CommonCategories;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -37,14 +37,18 @@ public class Employee {
     private LocalDate dateOfBirth;
 
     @Column(name = "gender")
-    @Enumerated(EnumType.STRING)
-    private GenderType gender;
+    private String gender;
 
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
 
-    public enum GenderType {
-        MALE, FEMALE, OTHER
+    //Helper method to check the gender value
+    public boolean isMale() {
+        return CommonCategories.GenderType.MALE.equals(this.gender);
+    }
+
+    public boolean isFemale() {
+        return CommonCategories.GenderType.FEMALE.equals(this.gender);
     }
 }

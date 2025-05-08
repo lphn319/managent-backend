@@ -1,7 +1,5 @@
-// UserDto.java
 package hcmute.lp.backend.model.dto.user;
 
-import hcmute.lp.backend.model.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +19,7 @@ public class UserDto {
     private String phoneNumber;
     private LocalDate dateOfBirth;
     private String gender;
-    private User.UserStatus status;
+    private String status; // Sửa lại từ Enum sang String
     private String roleName;
     private String departmentName;
     private LocalDateTime createdAt;
@@ -29,6 +27,6 @@ public class UserDto {
 
     // Helper method for backward compatibility
     public boolean isActive() {
-        return this.status == User.UserStatus.ACTIVE;
+        return "ACTIVE".equals(this.status);
     }
 }

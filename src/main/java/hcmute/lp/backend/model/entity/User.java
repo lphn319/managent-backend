@@ -33,8 +33,7 @@ public class User extends BaseEntity {
 
 
     @Column(name = "status", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private UserStatus status = UserStatus.ACTIVE; // Default value
+    private String status;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -52,20 +51,7 @@ public class User extends BaseEntity {
     )
     private Set<Permission> additionalPermissions = new HashSet<>();
 
-    public enum UserStatus {
-        ACTIVE, INACTIVE
-    }
 
-    // Helper method for backward compatibility
-    @Transient
-    public boolean isActive() {
-        return this.status == UserStatus.ACTIVE;
-    }
-
-    // Helper method for backward compatibility
-    public void setActive(boolean active) {
-        this.status = active ? UserStatus.ACTIVE : UserStatus.INACTIVE;
-    }
 
     // Helper method để kiểm tra quyền
     public boolean hasPermission(String permissionCode) {
