@@ -37,15 +37,11 @@ public class Brand extends BaseEntity {
     @Column(name = "website")
     private String website;
 
-    @Column(name = "status", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private BrandStatus status;
-
     @OneToMany
     @JoinColumn(name = "brand_id")
     private List<Product> products;
 
-    // Transient field for product count (not stored in database)
+    // Transient field for product count (not stored in a database)
     @Transient
     private Integer productCount;
 
@@ -55,10 +51,5 @@ public class Brand extends BaseEntity {
             return this.productCount;
         }
         return this.products != null ? this.products.size() : 0;
-    }
-
-
-    public enum BrandStatus {
-        ACTIVE, INACTIVE
     }
 }

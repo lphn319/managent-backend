@@ -9,11 +9,17 @@ import java.util.Set;
 
 public interface SupplierService {
     List<SupplierDto> getAllSuppliers();
+
     SupplierDto getSupplierById(int id);
+
     SupplierDto createSupplier(SupplierRequest supplierRequest);
+
     SupplierDto updateSupplier(int id, SupplierRequest supplierRequest);
+
     void deleteSupplier(int id);
+
     boolean existsById(int id);
+
     boolean existsByCompanyName(String companyName);
 
     // Thêm phương thức cập nhật trạng thái
@@ -22,7 +28,4 @@ public interface SupplierService {
     // Thêm phương thức cập nhật danh mục
     SupplierDto updateSupplierCategories(int id, Set<Integer> categoryIds);
 
-    // Thêm phương thức phân trang
-    Page<SupplierDto> getSuppliersPaginated(
-            int page, int size, String sortBy, String sortDirection, String keyword);
 }

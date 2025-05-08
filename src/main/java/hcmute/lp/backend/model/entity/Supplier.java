@@ -42,10 +42,6 @@ public class Supplier extends BaseEntity {
     @Column(name = "logo")
     private String logo;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    private SupplierStatus status = SupplierStatus.ACTIVE;
-
     @OneToMany(mappedBy = "supplier")
     private List<Import> imports;
 
@@ -56,10 +52,6 @@ public class Supplier extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private Set<Category> categories = new HashSet<>();
-
-    public enum SupplierStatus {
-        ACTIVE, INACTIVE
-    }
 
     // Các helper methods để quản lý quan hệ
     public void addCategory(Category category) {

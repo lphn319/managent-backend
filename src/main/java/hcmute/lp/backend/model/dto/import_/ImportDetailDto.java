@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ImportDetailDto {
-    private Long id; // Thay đổi từ int sang Long
+    private Long id;
     private ProductDto product;
     private int quantity;
     private double price;

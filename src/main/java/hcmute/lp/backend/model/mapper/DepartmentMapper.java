@@ -15,9 +15,6 @@ public interface DepartmentMapper {
     @Mapping(target = "employees", ignore = true)
     Department toEntity(DepartmentRequest departmentRequest);
 
-    @Mapping(target = "id", source = "id")
-    @Mapping(target = "name", source = "name")
-    @Mapping(target = "description", source = "description")
     DepartmentDto toDto(Department department);
 
     List<DepartmentDto> toDtoList(List<Department> departments);

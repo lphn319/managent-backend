@@ -15,13 +15,12 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class ImportDto {
-    private Long id; // Thay đổi từ int sang Long
+    private Long id;
     private String status;
     private double totalAmount;
     private int quantity;
     private String notes;
     private SupplierDto supplier;
-    private UserDto employee;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private List<ImportDetailDto> importDetails;

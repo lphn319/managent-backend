@@ -19,7 +19,4 @@ public class CategoryRequest {
     private String description;
 
     private Integer parentId;
-
-    @Pattern(regexp = "^(ACTIVE|INACTIVE)$", message = "Status must be either ACTIVE or INACTIVE")
-    private String status;
 }

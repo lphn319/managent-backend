@@ -11,7 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 public class ImportRequest {
     private int supplierId;
-    private int employeeId;
     private String status;
     private String notes;
     private List<ImportDetailRequest> importDetails;

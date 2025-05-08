@@ -1,6 +1,5 @@
 package hcmute.lp.backend.model.dto.user;
 
-import hcmute.lp.backend.model.entity.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -34,6 +33,7 @@ public class UserRequest {
     private LocalDate dateOfBirth;
 
     @NotBlank(message = "Giới tính không được để trống")
+    @Pattern(regexp = "^(MALE|FEMALE|OTHER)$", message = "Giới tính phải là MALE, FEMALE hoặc OTHER")
     private String gender;
 
     private Integer departmentId;
@@ -41,6 +41,6 @@ public class UserRequest {
     @NotNull(message = "Vai trò không được để trống")
     private Long roleId;
 
-    // Thêm trường status
-    private User.UserStatus status;
+    @Pattern(regexp = "^(ACTIVE|INACTIVE)$", message = "Trạng thái phải là ACTIVE hoặc INACTIVE")
+    private String status = "ACTIVE"; // Sửa lại từ Enum sang String với giá trị mặc định
 }

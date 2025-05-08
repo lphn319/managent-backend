@@ -1,24 +1,23 @@
 package hcmute.lp.backend.model.dto.role;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.Set;
 
 @Data
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class RoleRequest {
-    @NotBlank(message = "Role name is required")
-    @Size(min = 3, max = 50, message = "Role name must be between 3 and 50 characters")
+    @NotBlank(message = "Name is required")
+    @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
     private String name;
 
-//    @NotEmpty(message = "Permissions are required")
-//    private List<String> permissions;
+    @Size(max = 255, message = "Description must be less than 255 characters")
+    private String description;
+
+    private Set<Integer> permissionIds;
 }

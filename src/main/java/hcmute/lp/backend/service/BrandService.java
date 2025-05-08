@@ -17,10 +17,4 @@ public interface BrandService {
     void deleteBrand(int id);
     boolean existsById(int id);
     boolean existsByName(String name);
-    BrandDto updateBrandStatus(int id, String status);
-    List<BrandDto> getFeaturedBrands(int limit);
-
-    Map<String, Integer> getBrandStatistics();
-
-    Page<BrandDto> getBrandsPaginated(int page, int size, String sortBy, String sortDirection, String status);
 }

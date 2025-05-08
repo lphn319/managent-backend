@@ -25,28 +25,9 @@ public abstract class SupplierMapper {
 
     public abstract List<SupplierDto> toDtoList(List<Supplier> suppliers);
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(target = "createdBy", ignore = true)
-    @Mapping(target = "lastModifiedBy", ignore = true)
-    @Mapping(target = "imports", ignore = true)
-    @Mapping(target = "categories", expression = "java(mapCategories(supplierRequest.getCategoryIds()))")
+
     public abstract Supplier toEntity(SupplierRequest supplierRequest);
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(target = "createdBy", ignore = true)
-    @Mapping(target = "lastModifiedBy", ignore = true)
-    @Mapping(target = "imports", ignore = true)
-    @Mapping(target = "companyName", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target = "address", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target = "phone", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target = "email", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target = "description", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target = "logo", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target = "status", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "categories", expression = "java(supplierRequest.getCategoryIds() != null ? mapCategories(supplierRequest.getCategoryIds()) : supplier.getCategories())")
     public abstract void updateEntityFromRequest(@MappingTarget Supplier supplier, SupplierRequest supplierRequest);
 

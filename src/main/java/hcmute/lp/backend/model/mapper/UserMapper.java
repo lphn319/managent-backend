@@ -18,26 +18,15 @@ public interface UserMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "role", source = "role")
     @Mapping(target = "name", source = "userRequest.name")
-    @Mapping(target = "department", source = "department")
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    @Mapping(target = "createdBy", ignore = true)
-    @Mapping(target = "lastModifiedBy", ignore = true)
     @Mapping(target = "status", constant = "ACTIVE")
     User toEntity(UserRequest userRequest, Role role, Department department);
 
     @Mapping(target = "roleName", source = "role.name")
-    @Mapping(target = "departmentName", expression = "java(user.getDepartment() != null ? user.getDepartment().getName() : null)")
     @Mapping(target = "status", source = "status")
-    @Mapping(target = "dateOfBirth", source = "dateOfBirth")
     UserDto toDto(User user);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "name", source = "userRequest.name", nullValuePropertyMappingStrategy = org.mapstruct.NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "role", source = "role")
-    @Mapping(target = "department", source = "department")
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "createdBy", ignore = true)
-    @Mapping(target = "lastModifiedBy", ignore = true)
     void updateUserFromRequest(UserRequest userRequest, @MappingTarget User user, Role role, Department department);
 }

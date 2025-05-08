@@ -18,5 +18,4 @@ public class CategoryDto {
     private int productCount;
     private Integer parentId;
     private List<CategoryDto> children;
-    private String status;
 }

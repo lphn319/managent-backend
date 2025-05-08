@@ -18,5 +18,4 @@ public class BrandDto {
     private String origin;
     private String website;
     private int productCount;
-    private String status;
 }

@@ -2,11 +2,14 @@
 package hcmute.lp.backend.model.entity;
 
 import hcmute.lp.backend.model.common.BaseEntity;
+import hcmute.lp.backend.model.common.CommonCategories;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -29,47 +32,57 @@ public class User extends BaseEntity {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "phone_number", nullable = false, unique = true)
-    private String phoneNumber;
-
-    @Column(name = "password", nullable = false)
+    @Column(name= "password", nullable = false)
     private String password;
 
-    @Column(name = "date_of_birth")
-    private LocalDate dateOfBirth;
-
-    @Column(name = "gender")
-    @Enumerated(EnumType.STRING)
-    private GenderType gender;
-
     @Column(name = "status", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private UserStatus status = UserStatus.ACTIVE; // Default value
+    private String status;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
     private Role role;
 
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private Department department;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_permissions",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id")
+    )
+    private Set<Permission> additionalPermissions = new HashSet<>();
 
-    public enum GenderType {
-        MALE, FEMALE, OTHER
+
+
+    // Helper method để kiểm tra quyền
+    public boolean hasPermission(String permissionCode) {
+        // Check permissions from the role
+        if (role != null && role.hasPermission(permissionCode)) {
+            return true;
+        }
+
+        // Check additional permissions
+        return additionalPermissions.stream()
+                .anyMatch(p -> p.getCode().equals(permissionCode));
     }
 
-    public enum UserStatus {
-        ACTIVE, INACTIVE
+    public Set<Permission> getAllPermissions() {
+        Set<Permission> allPermissions = new HashSet<>();
+
+        // Add permissions from the role
+        if (role != null) {
+            allPermissions.addAll(role.getPermissions());
+        }
+
+        // Add additional permissions
+        allPermissions.addAll(additionalPermissions);
+
+        return allPermissions;
     }
 
-    // Helper method for backward compatibility
-    @Transient
+    // Helper method to check the value of status
     public boolean isActive() {
-        return this.status == UserStatus.ACTIVE;
+        return CommonCategories.UserStatus.ACTIVE.equals(this.status);
     }
-
-    // Helper method for backward compatibility
-    public void setActive(boolean active) {
-        this.status = active ? UserStatus.ACTIVE : UserStatus.INACTIVE;
+    public boolean isInactive() {
+        return CommonCategories.UserStatus.INACTIVE.equals(this.status);
     }
 }
